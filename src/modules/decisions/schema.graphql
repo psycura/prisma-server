@@ -1,0 +1,21 @@
+# import DecisionWhereInput,DecisionCreateInput,BatchPayload,DecisionUpdateInput,DecisionWhereUniqueInput,DecisionOrderByInput,Decision from "../../generated/prisma.graphql"
+
+type Query {
+    decisions(
+        where: DecisionWhereInput,
+        orderBy: DecisionOrderByInput,
+        skip: Int, after: String,
+        before: String, first: Int, last: Int
+    ): [Decision]!
+    decision(where: DecisionWhereUniqueInput!): Decision
+    decisionsConnection(where: DecisionWhereInput, orderBy: DecisionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DecisionConnection!
+}
+
+type Mutation {
+    createDecision(data: DecisionCreateInput!): Decision!
+    updateDecision(data: DecisionUpdateInput!, where: DecisionWhereUniqueInput!): Decision
+    deleteDecision(where: DecisionWhereUniqueInput!): Decision
+    upsertDecision(where: DecisionWhereUniqueInput!, create: DecisionCreateInput!, update: DecisionUpdateInput!): Decision!
+    updateManyDecisions(data: DecisionUpdateInput!, where: DecisionWhereInput): BatchPayload!
+    deleteManyDecisions(where: DecisionWhereInput): BatchPayload!
+}

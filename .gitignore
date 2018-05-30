@@ -1,0 +1,17 @@
+logs
+*.log
+npm-debug.log*
+.DS_Store
+
+coverage
+node_modules
+.idea
+.next
+build
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+/nbproject/private/
+/src/libs/cbm-graphql-firebase-adminsdk-c7yu1-e20f5db0f5.json
+/.env

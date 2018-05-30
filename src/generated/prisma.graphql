@@ -1,0 +1,5631 @@
+# source: http://localhost:4466
+# timestamp: Wed May 30 2018 16:29:54 GMT+0300 (Jerusalem Daylight Time)
+
+type AggregateAnswer {
+  count: Int!
+}
+
+type AggregateComment {
+  count: Int!
+}
+
+type AggregateDecision {
+  count: Int!
+}
+
+type AggregateFile {
+  count: Int!
+}
+
+type AggregateManagerProfile {
+  count: Int!
+}
+
+type AggregateNotificationSettings {
+  count: Int!
+}
+
+type AggregateOnQuizStatusChange {
+  count: Int!
+}
+
+type AggregateQuestion {
+  count: Int!
+}
+
+type AggregateQuiz {
+  count: Int!
+}
+
+type AggregateReport {
+  count: Int!
+}
+
+type AggregateReporterProfile {
+  count: Int!
+}
+
+type AggregateUser {
+  count: Int!
+}
+
+type Answer implements Node {
+  answer: String!
+  comment: String
+  files(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [File!]
+  id: ID!
+  report(where: ReportWhereInput): Report!
+  selectedOption: Int!
+}
+
+"""A connection to a list of items."""
+type AnswerConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [AnswerEdge]!
+  aggregate: AggregateAnswer!
+}
+
+input AnswerCreateInput {
+  answer: String!
+  comment: String
+  selectedOption: Int!
+  files: FileCreateManyWithoutAnswerInput
+  report: ReportCreateOneWithoutAnswersInput!
+}
+
+input AnswerCreateManyWithoutReportInput {
+  create: [AnswerCreateWithoutReportInput!]
+  connect: [AnswerWhereUniqueInput!]
+}
+
+input AnswerCreateOneWithoutFilesInput {
+  create: AnswerCreateWithoutFilesInput
+  connect: AnswerWhereUniqueInput
+}
+
+input AnswerCreateWithoutFilesInput {
+  answer: String!
+  comment: String
+  selectedOption: Int!
+  report: ReportCreateOneWithoutAnswersInput!
+}
+
+input AnswerCreateWithoutReportInput {
+  answer: String!
+  comment: String
+  selectedOption: Int!
+  files: FileCreateManyWithoutAnswerInput
+}
+
+"""An edge in a connection."""
+type AnswerEdge {
+  """The item at the end of the edge."""
+  node: Answer!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum AnswerOrderByInput {
+  answer_ASC
+  answer_DESC
+  comment_ASC
+  comment_DESC
+  id_ASC
+  id_DESC
+  selectedOption_ASC
+  selectedOption_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type AnswerPreviousValues {
+  answer: String!
+  comment: String
+  id: ID!
+  selectedOption: Int!
+}
+
+type AnswerSubscriptionPayload {
+  mutation: MutationType!
+  node: Answer
+  updatedFields: [String!]
+  previousValues: AnswerPreviousValues
+}
+
+input AnswerSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AnswerSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AnswerSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AnswerSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: AnswerWhereInput
+}
+
+input AnswerUpdateInput {
+  answer: String
+  comment: String
+  selectedOption: Int
+  files: FileUpdateManyWithoutAnswerInput
+  report: ReportUpdateOneWithoutAnswersInput
+}
+
+input AnswerUpdateManyWithoutReportInput {
+  create: [AnswerCreateWithoutReportInput!]
+  connect: [AnswerWhereUniqueInput!]
+  disconnect: [AnswerWhereUniqueInput!]
+  delete: [AnswerWhereUniqueInput!]
+  update: [AnswerUpdateWithWhereUniqueWithoutReportInput!]
+  upsert: [AnswerUpsertWithWhereUniqueWithoutReportInput!]
+}
+
+input AnswerUpdateOneWithoutFilesInput {
+  create: AnswerCreateWithoutFilesInput
+  connect: AnswerWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: AnswerUpdateWithoutFilesDataInput
+  upsert: AnswerUpsertWithoutFilesInput
+}
+
+input AnswerUpdateWithoutFilesDataInput {
+  answer: String
+  comment: String
+  selectedOption: Int
+  report: ReportUpdateOneWithoutAnswersInput
+}
+
+input AnswerUpdateWithoutReportDataInput {
+  answer: String
+  comment: String
+  selectedOption: Int
+  files: FileUpdateManyWithoutAnswerInput
+}
+
+input AnswerUpdateWithWhereUniqueWithoutReportInput {
+  where: AnswerWhereUniqueInput!
+  data: AnswerUpdateWithoutReportDataInput!
+}
+
+input AnswerUpsertWithoutFilesInput {
+  update: AnswerUpdateWithoutFilesDataInput!
+  create: AnswerCreateWithoutFilesInput!
+}
+
+input AnswerUpsertWithWhereUniqueWithoutReportInput {
+  where: AnswerWhereUniqueInput!
+  update: AnswerUpdateWithoutReportDataInput!
+  create: AnswerCreateWithoutReportInput!
+}
+
+input AnswerWhereInput {
+  """Logical AND on all given filters."""
+  AND: [AnswerWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [AnswerWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [AnswerWhereInput!]
+  answer: String
+
+  """All values that are not equal to given value."""
+  answer_not: String
+
+  """All values that are contained in given list."""
+  answer_in: [String!]
+
+  """All values that are not contained in given list."""
+  answer_not_in: [String!]
+
+  """All values less than the given value."""
+  answer_lt: String
+
+  """All values less than or equal the given value."""
+  answer_lte: String
+
+  """All values greater than the given value."""
+  answer_gt: String
+
+  """All values greater than or equal the given value."""
+  answer_gte: String
+
+  """All values containing the given string."""
+  answer_contains: String
+
+  """All values not containing the given string."""
+  answer_not_contains: String
+
+  """All values starting with the given string."""
+  answer_starts_with: String
+
+  """All values not starting with the given string."""
+  answer_not_starts_with: String
+
+  """All values ending with the given string."""
+  answer_ends_with: String
+
+  """All values not ending with the given string."""
+  answer_not_ends_with: String
+  comment: String
+
+  """All values that are not equal to given value."""
+  comment_not: String
+
+  """All values that are contained in given list."""
+  comment_in: [String!]
+
+  """All values that are not contained in given list."""
+  comment_not_in: [String!]
+
+  """All values less than the given value."""
+  comment_lt: String
+
+  """All values less than or equal the given value."""
+  comment_lte: String
+
+  """All values greater than the given value."""
+  comment_gt: String
+
+  """All values greater than or equal the given value."""
+  comment_gte: String
+
+  """All values containing the given string."""
+  comment_contains: String
+
+  """All values not containing the given string."""
+  comment_not_contains: String
+
+  """All values starting with the given string."""
+  comment_starts_with: String
+
+  """All values not starting with the given string."""
+  comment_not_starts_with: String
+
+  """All values ending with the given string."""
+  comment_ends_with: String
+
+  """All values not ending with the given string."""
+  comment_not_ends_with: String
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  selectedOption: Int
+
+  """All values that are not equal to given value."""
+  selectedOption_not: Int
+
+  """All values that are contained in given list."""
+  selectedOption_in: [Int!]
+
+  """All values that are not contained in given list."""
+  selectedOption_not_in: [Int!]
+
+  """All values less than the given value."""
+  selectedOption_lt: Int
+
+  """All values less than or equal the given value."""
+  selectedOption_lte: Int
+
+  """All values greater than the given value."""
+  selectedOption_gt: Int
+
+  """All values greater than or equal the given value."""
+  selectedOption_gte: Int
+  files_every: FileWhereInput
+  files_some: FileWhereInput
+  files_none: FileWhereInput
+  report: ReportWhereInput
+}
+
+input AnswerWhereUniqueInput {
+  id: ID
+}
+
+type BatchPayload {
+  """The number of nodes that have been affected by the Batch operation."""
+  count: Long!
+}
+
+type Comment implements Node {
+  creationDate: DateTime!
+  id: ID!
+  text: String!
+  user(where: ManagerProfileWhereInput): ManagerProfile!
+}
+
+"""A connection to a list of items."""
+type CommentConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [CommentEdge]!
+  aggregate: AggregateComment!
+}
+
+input CommentCreateInput {
+  creationDate: DateTime!
+  text: String!
+  user: ManagerProfileCreateOneWithoutCommentsInput!
+}
+
+input CommentCreateManyWithoutUserInput {
+  create: [CommentCreateWithoutUserInput!]
+  connect: [CommentWhereUniqueInput!]
+}
+
+input CommentCreateWithoutUserInput {
+  creationDate: DateTime!
+  text: String!
+}
+
+"""An edge in a connection."""
+type CommentEdge {
+  """The item at the end of the edge."""
+  node: Comment!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum CommentOrderByInput {
+  creationDate_ASC
+  creationDate_DESC
+  id_ASC
+  id_DESC
+  text_ASC
+  text_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type CommentPreviousValues {
+  creationDate: DateTime!
+  id: ID!
+  text: String!
+}
+
+type CommentSubscriptionPayload {
+  mutation: MutationType!
+  node: Comment
+  updatedFields: [String!]
+  previousValues: CommentPreviousValues
+}
+
+input CommentSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CommentSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CommentSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CommentSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: CommentWhereInput
+}
+
+input CommentUpdateInput {
+  creationDate: DateTime
+  text: String
+  user: ManagerProfileUpdateOneWithoutCommentsInput
+}
+
+input CommentUpdateManyWithoutUserInput {
+  create: [CommentCreateWithoutUserInput!]
+  connect: [CommentWhereUniqueInput!]
+  disconnect: [CommentWhereUniqueInput!]
+  delete: [CommentWhereUniqueInput!]
+  update: [CommentUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [CommentUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input CommentUpdateWithoutUserDataInput {
+  creationDate: DateTime
+  text: String
+}
+
+input CommentUpdateWithWhereUniqueWithoutUserInput {
+  where: CommentWhereUniqueInput!
+  data: CommentUpdateWithoutUserDataInput!
+}
+
+input CommentUpsertWithWhereUniqueWithoutUserInput {
+  where: CommentWhereUniqueInput!
+  update: CommentUpdateWithoutUserDataInput!
+  create: CommentCreateWithoutUserInput!
+}
+
+input CommentWhereInput {
+  """Logical AND on all given filters."""
+  AND: [CommentWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [CommentWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [CommentWhereInput!]
+  creationDate: DateTime
+
+  """All values that are not equal to given value."""
+  creationDate_not: DateTime
+
+  """All values that are contained in given list."""
+  creationDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  creationDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  creationDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  creationDate_lte: DateTime
+
+  """All values greater than the given value."""
+  creationDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  creationDate_gte: DateTime
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  text: String
+
+  """All values that are not equal to given value."""
+  text_not: String
+
+  """All values that are contained in given list."""
+  text_in: [String!]
+
+  """All values that are not contained in given list."""
+  text_not_in: [String!]
+
+  """All values less than the given value."""
+  text_lt: String
+
+  """All values less than or equal the given value."""
+  text_lte: String
+
+  """All values greater than the given value."""
+  text_gt: String
+
+  """All values greater than or equal the given value."""
+  text_gte: String
+
+  """All values containing the given string."""
+  text_contains: String
+
+  """All values not containing the given string."""
+  text_not_contains: String
+
+  """All values starting with the given string."""
+  text_starts_with: String
+
+  """All values not starting with the given string."""
+  text_not_starts_with: String
+
+  """All values ending with the given string."""
+  text_ends_with: String
+
+  """All values not ending with the given string."""
+  text_not_ends_with: String
+  user: ManagerProfileWhereInput
+}
+
+input CommentWhereUniqueInput {
+  id: ID
+}
+
+scalar DateTime
+
+type Decision implements Node {
+  activeStep: Int!
+  category: String
+  creationDate: DateTime!
+  description: String!
+  extId: String!
+  id: ID!
+  lastUpdate: DateTime
+  link: String
+  publishDate: DateTime
+  quizzes(where: QuizWhereInput, orderBy: QuizOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Quiz!]
+  reports(where: ReportWhereInput, orderBy: ReportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Report!]
+  status: String!
+  steps: [String!]
+  title: String!
+  user(where: ManagerProfileWhereInput): ManagerProfile!
+}
+
+"""A connection to a list of items."""
+type DecisionConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [DecisionEdge]!
+  aggregate: AggregateDecision!
+}
+
+input DecisionCreateInput {
+  activeStep: Int!
+  category: String
+  creationDate: DateTime!
+  description: String!
+  extId: String!
+  lastUpdate: DateTime
+  link: String
+  publishDate: DateTime
+  status: String!
+  title: String!
+  steps: DecisionCreatestepsInput
+  quizzes: QuizCreateManyWithoutDecisionInput
+  reports: ReportCreateManyWithoutDecisionInput
+  user: ManagerProfileCreateOneWithoutDecisionsInput!
+}
+
+input DecisionCreateManyWithoutUserInput {
+  create: [DecisionCreateWithoutUserInput!]
+  connect: [DecisionWhereUniqueInput!]
+}
+
+input DecisionCreateOneWithoutQuizzesInput {
+  create: DecisionCreateWithoutQuizzesInput
+  connect: DecisionWhereUniqueInput
+}
+
+input DecisionCreateOneWithoutReportsInput {
+  create: DecisionCreateWithoutReportsInput
+  connect: DecisionWhereUniqueInput
+}
+
+input DecisionCreatestepsInput {
+  set: [String!]
+}
+
+input DecisionCreateWithoutQuizzesInput {
+  activeStep: Int!
+  category: String
+  creationDate: DateTime!
+  description: String!
+  extId: String!
+  lastUpdate: DateTime
+  link: String
+  publishDate: DateTime
+  status: String!
+  title: String!
+  steps: DecisionCreatestepsInput
+  reports: ReportCreateManyWithoutDecisionInput
+  user: ManagerProfileCreateOneWithoutDecisionsInput!
+}
+
+input DecisionCreateWithoutReportsInput {
+  activeStep: Int!
+  category: String
+  creationDate: DateTime!
+  description: String!
+  extId: String!
+  lastUpdate: DateTime
+  link: String
+  publishDate: DateTime
+  status: String!
+  title: String!
+  steps: DecisionCreatestepsInput
+  quizzes: QuizCreateManyWithoutDecisionInput
+  user: ManagerProfileCreateOneWithoutDecisionsInput!
+}
+
+input DecisionCreateWithoutUserInput {
+  activeStep: Int!
+  category: String
+  creationDate: DateTime!
+  description: String!
+  extId: String!
+  lastUpdate: DateTime
+  link: String
+  publishDate: DateTime
+  status: String!
+  title: String!
+  steps: DecisionCreatestepsInput
+  quizzes: QuizCreateManyWithoutDecisionInput
+  reports: ReportCreateManyWithoutDecisionInput
+}
+
+"""An edge in a connection."""
+type DecisionEdge {
+  """The item at the end of the edge."""
+  node: Decision!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum DecisionOrderByInput {
+  activeStep_ASC
+  activeStep_DESC
+  category_ASC
+  category_DESC
+  creationDate_ASC
+  creationDate_DESC
+  description_ASC
+  description_DESC
+  extId_ASC
+  extId_DESC
+  id_ASC
+  id_DESC
+  lastUpdate_ASC
+  lastUpdate_DESC
+  link_ASC
+  link_DESC
+  publishDate_ASC
+  publishDate_DESC
+  status_ASC
+  status_DESC
+  title_ASC
+  title_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type DecisionPreviousValues {
+  activeStep: Int!
+  category: String
+  creationDate: DateTime!
+  description: String!
+  extId: String!
+  id: ID!
+  lastUpdate: DateTime
+  link: String
+  publishDate: DateTime
+  status: String!
+  steps: [String!]
+  title: String!
+}
+
+type DecisionSubscriptionPayload {
+  mutation: MutationType!
+  node: Decision
+  updatedFields: [String!]
+  previousValues: DecisionPreviousValues
+}
+
+input DecisionSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [DecisionSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [DecisionSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [DecisionSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: DecisionWhereInput
+}
+
+input DecisionUpdateInput {
+  activeStep: Int
+  category: String
+  creationDate: DateTime
+  description: String
+  extId: String
+  lastUpdate: DateTime
+  link: String
+  publishDate: DateTime
+  status: String
+  title: String
+  steps: DecisionUpdatestepsInput
+  quizzes: QuizUpdateManyWithoutDecisionInput
+  reports: ReportUpdateManyWithoutDecisionInput
+  user: ManagerProfileUpdateOneWithoutDecisionsInput
+}
+
+input DecisionUpdateManyWithoutUserInput {
+  create: [DecisionCreateWithoutUserInput!]
+  connect: [DecisionWhereUniqueInput!]
+  disconnect: [DecisionWhereUniqueInput!]
+  delete: [DecisionWhereUniqueInput!]
+  update: [DecisionUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [DecisionUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input DecisionUpdateOneWithoutQuizzesInput {
+  create: DecisionCreateWithoutQuizzesInput
+  connect: DecisionWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: DecisionUpdateWithoutQuizzesDataInput
+  upsert: DecisionUpsertWithoutQuizzesInput
+}
+
+input DecisionUpdateOneWithoutReportsInput {
+  create: DecisionCreateWithoutReportsInput
+  connect: DecisionWhereUniqueInput
+  delete: Boolean
+  update: DecisionUpdateWithoutReportsDataInput
+  upsert: DecisionUpsertWithoutReportsInput
+}
+
+input DecisionUpdatestepsInput {
+  set: [String!]
+}
+
+input DecisionUpdateWithoutQuizzesDataInput {
+  activeStep: Int
+  category: String
+  creationDate: DateTime
+  description: String
+  extId: String
+  lastUpdate: DateTime
+  link: String
+  publishDate: DateTime
+  status: String
+  title: String
+  steps: DecisionUpdatestepsInput
+  reports: ReportUpdateManyWithoutDecisionInput
+  user: ManagerProfileUpdateOneWithoutDecisionsInput
+}
+
+input DecisionUpdateWithoutReportsDataInput {
+  activeStep: Int
+  category: String
+  creationDate: DateTime
+  description: String
+  extId: String
+  lastUpdate: DateTime
+  link: String
+  publishDate: DateTime
+  status: String
+  title: String
+  steps: DecisionUpdatestepsInput
+  quizzes: QuizUpdateManyWithoutDecisionInput
+  user: ManagerProfileUpdateOneWithoutDecisionsInput
+}
+
+input DecisionUpdateWithoutUserDataInput {
+  activeStep: Int
+  category: String
+  creationDate: DateTime
+  description: String
+  extId: String
+  lastUpdate: DateTime
+  link: String
+  publishDate: DateTime
+  status: String
+  title: String
+  steps: DecisionUpdatestepsInput
+  quizzes: QuizUpdateManyWithoutDecisionInput
+  reports: ReportUpdateManyWithoutDecisionInput
+}
+
+input DecisionUpdateWithWhereUniqueWithoutUserInput {
+  where: DecisionWhereUniqueInput!
+  data: DecisionUpdateWithoutUserDataInput!
+}
+
+input DecisionUpsertWithoutQuizzesInput {
+  update: DecisionUpdateWithoutQuizzesDataInput!
+  create: DecisionCreateWithoutQuizzesInput!
+}
+
+input DecisionUpsertWithoutReportsInput {
+  update: DecisionUpdateWithoutReportsDataInput!
+  create: DecisionCreateWithoutReportsInput!
+}
+
+input DecisionUpsertWithWhereUniqueWithoutUserInput {
+  where: DecisionWhereUniqueInput!
+  update: DecisionUpdateWithoutUserDataInput!
+  create: DecisionCreateWithoutUserInput!
+}
+
+input DecisionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [DecisionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [DecisionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [DecisionWhereInput!]
+  activeStep: Int
+
+  """All values that are not equal to given value."""
+  activeStep_not: Int
+
+  """All values that are contained in given list."""
+  activeStep_in: [Int!]
+
+  """All values that are not contained in given list."""
+  activeStep_not_in: [Int!]
+
+  """All values less than the given value."""
+  activeStep_lt: Int
+
+  """All values less than or equal the given value."""
+  activeStep_lte: Int
+
+  """All values greater than the given value."""
+  activeStep_gt: Int
+
+  """All values greater than or equal the given value."""
+  activeStep_gte: Int
+  category: String
+
+  """All values that are not equal to given value."""
+  category_not: String
+
+  """All values that are contained in given list."""
+  category_in: [String!]
+
+  """All values that are not contained in given list."""
+  category_not_in: [String!]
+
+  """All values less than the given value."""
+  category_lt: String
+
+  """All values less than or equal the given value."""
+  category_lte: String
+
+  """All values greater than the given value."""
+  category_gt: String
+
+  """All values greater than or equal the given value."""
+  category_gte: String
+
+  """All values containing the given string."""
+  category_contains: String
+
+  """All values not containing the given string."""
+  category_not_contains: String
+
+  """All values starting with the given string."""
+  category_starts_with: String
+
+  """All values not starting with the given string."""
+  category_not_starts_with: String
+
+  """All values ending with the given string."""
+  category_ends_with: String
+
+  """All values not ending with the given string."""
+  category_not_ends_with: String
+  creationDate: DateTime
+
+  """All values that are not equal to given value."""
+  creationDate_not: DateTime
+
+  """All values that are contained in given list."""
+  creationDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  creationDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  creationDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  creationDate_lte: DateTime
+
+  """All values greater than the given value."""
+  creationDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  creationDate_gte: DateTime
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  extId: String
+
+  """All values that are not equal to given value."""
+  extId_not: String
+
+  """All values that are contained in given list."""
+  extId_in: [String!]
+
+  """All values that are not contained in given list."""
+  extId_not_in: [String!]
+
+  """All values less than the given value."""
+  extId_lt: String
+
+  """All values less than or equal the given value."""
+  extId_lte: String
+
+  """All values greater than the given value."""
+  extId_gt: String
+
+  """All values greater than or equal the given value."""
+  extId_gte: String
+
+  """All values containing the given string."""
+  extId_contains: String
+
+  """All values not containing the given string."""
+  extId_not_contains: String
+
+  """All values starting with the given string."""
+  extId_starts_with: String
+
+  """All values not starting with the given string."""
+  extId_not_starts_with: String
+
+  """All values ending with the given string."""
+  extId_ends_with: String
+
+  """All values not ending with the given string."""
+  extId_not_ends_with: String
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  lastUpdate: DateTime
+
+  """All values that are not equal to given value."""
+  lastUpdate_not: DateTime
+
+  """All values that are contained in given list."""
+  lastUpdate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  lastUpdate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  lastUpdate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  lastUpdate_lte: DateTime
+
+  """All values greater than the given value."""
+  lastUpdate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  lastUpdate_gte: DateTime
+  link: String
+
+  """All values that are not equal to given value."""
+  link_not: String
+
+  """All values that are contained in given list."""
+  link_in: [String!]
+
+  """All values that are not contained in given list."""
+  link_not_in: [String!]
+
+  """All values less than the given value."""
+  link_lt: String
+
+  """All values less than or equal the given value."""
+  link_lte: String
+
+  """All values greater than the given value."""
+  link_gt: String
+
+  """All values greater than or equal the given value."""
+  link_gte: String
+
+  """All values containing the given string."""
+  link_contains: String
+
+  """All values not containing the given string."""
+  link_not_contains: String
+
+  """All values starting with the given string."""
+  link_starts_with: String
+
+  """All values not starting with the given string."""
+  link_not_starts_with: String
+
+  """All values ending with the given string."""
+  link_ends_with: String
+
+  """All values not ending with the given string."""
+  link_not_ends_with: String
+  publishDate: DateTime
+
+  """All values that are not equal to given value."""
+  publishDate_not: DateTime
+
+  """All values that are contained in given list."""
+  publishDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  publishDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  publishDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  publishDate_lte: DateTime
+
+  """All values greater than the given value."""
+  publishDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  publishDate_gte: DateTime
+  status: String
+
+  """All values that are not equal to given value."""
+  status_not: String
+
+  """All values that are contained in given list."""
+  status_in: [String!]
+
+  """All values that are not contained in given list."""
+  status_not_in: [String!]
+
+  """All values less than the given value."""
+  status_lt: String
+
+  """All values less than or equal the given value."""
+  status_lte: String
+
+  """All values greater than the given value."""
+  status_gt: String
+
+  """All values greater than or equal the given value."""
+  status_gte: String
+
+  """All values containing the given string."""
+  status_contains: String
+
+  """All values not containing the given string."""
+  status_not_contains: String
+
+  """All values starting with the given string."""
+  status_starts_with: String
+
+  """All values not starting with the given string."""
+  status_not_starts_with: String
+
+  """All values ending with the given string."""
+  status_ends_with: String
+
+  """All values not ending with the given string."""
+  status_not_ends_with: String
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  quizzes_every: QuizWhereInput
+  quizzes_some: QuizWhereInput
+  quizzes_none: QuizWhereInput
+  reports_every: ReportWhereInput
+  reports_some: ReportWhereInput
+  reports_none: ReportWhereInput
+  user: ManagerProfileWhereInput
+}
+
+input DecisionWhereUniqueInput {
+  id: ID
+}
+
+type File implements Node {
+  answer(where: AnswerWhereInput): Answer
+  contentType: String!
+  createdAt: DateTime!
+  id: ID!
+  name: String!
+  report(where: ReportWhereInput): Report
+  size: Int!
+  updatedAt: DateTime!
+  url: String!
+}
+
+"""A connection to a list of items."""
+type FileConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [FileEdge]!
+  aggregate: AggregateFile!
+}
+
+input FileCreateInput {
+  contentType: String!
+  name: String!
+  size: Int!
+  url: String!
+  answer: AnswerCreateOneWithoutFilesInput
+  report: ReportCreateOneWithoutFilesInput
+}
+
+input FileCreateManyWithoutAnswerInput {
+  create: [FileCreateWithoutAnswerInput!]
+  connect: [FileWhereUniqueInput!]
+}
+
+input FileCreateManyWithoutReportInput {
+  create: [FileCreateWithoutReportInput!]
+  connect: [FileWhereUniqueInput!]
+}
+
+input FileCreateWithoutAnswerInput {
+  contentType: String!
+  name: String!
+  size: Int!
+  url: String!
+  report: ReportCreateOneWithoutFilesInput
+}
+
+input FileCreateWithoutReportInput {
+  contentType: String!
+  name: String!
+  size: Int!
+  url: String!
+  answer: AnswerCreateOneWithoutFilesInput
+}
+
+"""An edge in a connection."""
+type FileEdge {
+  """The item at the end of the edge."""
+  node: File!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum FileOrderByInput {
+  contentType_ASC
+  contentType_DESC
+  createdAt_ASC
+  createdAt_DESC
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  size_ASC
+  size_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  url_ASC
+  url_DESC
+}
+
+type FilePreviousValues {
+  contentType: String!
+  createdAt: DateTime!
+  id: ID!
+  name: String!
+  size: Int!
+  updatedAt: DateTime!
+  url: String!
+}
+
+type FileSubscriptionPayload {
+  mutation: MutationType!
+  node: File
+  updatedFields: [String!]
+  previousValues: FilePreviousValues
+}
+
+input FileSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FileSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FileSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FileSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: FileWhereInput
+}
+
+input FileUpdateInput {
+  contentType: String
+  name: String
+  size: Int
+  url: String
+  answer: AnswerUpdateOneWithoutFilesInput
+  report: ReportUpdateOneWithoutFilesInput
+}
+
+input FileUpdateManyWithoutAnswerInput {
+  create: [FileCreateWithoutAnswerInput!]
+  connect: [FileWhereUniqueInput!]
+  disconnect: [FileWhereUniqueInput!]
+  delete: [FileWhereUniqueInput!]
+  update: [FileUpdateWithWhereUniqueWithoutAnswerInput!]
+  upsert: [FileUpsertWithWhereUniqueWithoutAnswerInput!]
+}
+
+input FileUpdateManyWithoutReportInput {
+  create: [FileCreateWithoutReportInput!]
+  connect: [FileWhereUniqueInput!]
+  disconnect: [FileWhereUniqueInput!]
+  delete: [FileWhereUniqueInput!]
+  update: [FileUpdateWithWhereUniqueWithoutReportInput!]
+  upsert: [FileUpsertWithWhereUniqueWithoutReportInput!]
+}
+
+input FileUpdateWithoutAnswerDataInput {
+  contentType: String
+  name: String
+  size: Int
+  url: String
+  report: ReportUpdateOneWithoutFilesInput
+}
+
+input FileUpdateWithoutReportDataInput {
+  contentType: String
+  name: String
+  size: Int
+  url: String
+  answer: AnswerUpdateOneWithoutFilesInput
+}
+
+input FileUpdateWithWhereUniqueWithoutAnswerInput {
+  where: FileWhereUniqueInput!
+  data: FileUpdateWithoutAnswerDataInput!
+}
+
+input FileUpdateWithWhereUniqueWithoutReportInput {
+  where: FileWhereUniqueInput!
+  data: FileUpdateWithoutReportDataInput!
+}
+
+input FileUpsertWithWhereUniqueWithoutAnswerInput {
+  where: FileWhereUniqueInput!
+  update: FileUpdateWithoutAnswerDataInput!
+  create: FileCreateWithoutAnswerInput!
+}
+
+input FileUpsertWithWhereUniqueWithoutReportInput {
+  where: FileWhereUniqueInput!
+  update: FileUpdateWithoutReportDataInput!
+  create: FileCreateWithoutReportInput!
+}
+
+input FileWhereInput {
+  """Logical AND on all given filters."""
+  AND: [FileWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [FileWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [FileWhereInput!]
+  contentType: String
+
+  """All values that are not equal to given value."""
+  contentType_not: String
+
+  """All values that are contained in given list."""
+  contentType_in: [String!]
+
+  """All values that are not contained in given list."""
+  contentType_not_in: [String!]
+
+  """All values less than the given value."""
+  contentType_lt: String
+
+  """All values less than or equal the given value."""
+  contentType_lte: String
+
+  """All values greater than the given value."""
+  contentType_gt: String
+
+  """All values greater than or equal the given value."""
+  contentType_gte: String
+
+  """All values containing the given string."""
+  contentType_contains: String
+
+  """All values not containing the given string."""
+  contentType_not_contains: String
+
+  """All values starting with the given string."""
+  contentType_starts_with: String
+
+  """All values not starting with the given string."""
+  contentType_not_starts_with: String
+
+  """All values ending with the given string."""
+  contentType_ends_with: String
+
+  """All values not ending with the given string."""
+  contentType_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  size: Int
+
+  """All values that are not equal to given value."""
+  size_not: Int
+
+  """All values that are contained in given list."""
+  size_in: [Int!]
+
+  """All values that are not contained in given list."""
+  size_not_in: [Int!]
+
+  """All values less than the given value."""
+  size_lt: Int
+
+  """All values less than or equal the given value."""
+  size_lte: Int
+
+  """All values greater than the given value."""
+  size_gt: Int
+
+  """All values greater than or equal the given value."""
+  size_gte: Int
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  url: String
+
+  """All values that are not equal to given value."""
+  url_not: String
+
+  """All values that are contained in given list."""
+  url_in: [String!]
+
+  """All values that are not contained in given list."""
+  url_not_in: [String!]
+
+  """All values less than the given value."""
+  url_lt: String
+
+  """All values less than or equal the given value."""
+  url_lte: String
+
+  """All values greater than the given value."""
+  url_gt: String
+
+  """All values greater than or equal the given value."""
+  url_gte: String
+
+  """All values containing the given string."""
+  url_contains: String
+
+  """All values not containing the given string."""
+  url_not_contains: String
+
+  """All values starting with the given string."""
+  url_starts_with: String
+
+  """All values not starting with the given string."""
+  url_not_starts_with: String
+
+  """All values ending with the given string."""
+  url_ends_with: String
+
+  """All values not ending with the given string."""
+  url_not_ends_with: String
+  answer: AnswerWhereInput
+  report: ReportWhereInput
+}
+
+input FileWhereUniqueInput {
+  id: ID
+  url: String
+}
+
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type ManagerProfile implements Node {
+  id: ID!
+  createdAt: DateTime!
+  decisions(where: DecisionWhereInput, orderBy: DecisionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Decision!]
+  notificationsSettings(where: NotificationSettingsWhereInput, orderBy: NotificationSettingsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [NotificationSettings!]
+  quizzes(where: QuizWhereInput, orderBy: QuizOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Quiz!]
+  reporters(where: ReporterProfileWhereInput, orderBy: ReporterProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ReporterProfile!]
+  userName: String
+  isAdmin: Boolean
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment!]
+  user(where: UserWhereInput): User!
+  isActive: Boolean!
+}
+
+"""A connection to a list of items."""
+type ManagerProfileConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ManagerProfileEdge]!
+  aggregate: AggregateManagerProfile!
+}
+
+input ManagerProfileCreateInput {
+  userName: String
+  isAdmin: Boolean
+  isActive: Boolean!
+  decisions: DecisionCreateManyWithoutUserInput
+  notificationsSettings: NotificationSettingsCreateManyWithoutUserInput
+  quizzes: QuizCreateManyWithoutUserInput
+  reporters: ReporterProfileCreateManyWithoutManagerInput
+  comments: CommentCreateManyWithoutUserInput
+  user: UserCreateOneWithoutManagerProfileInput!
+}
+
+input ManagerProfileCreateOneWithoutCommentsInput {
+  create: ManagerProfileCreateWithoutCommentsInput
+  connect: ManagerProfileWhereUniqueInput
+}
+
+input ManagerProfileCreateOneWithoutDecisionsInput {
+  create: ManagerProfileCreateWithoutDecisionsInput
+  connect: ManagerProfileWhereUniqueInput
+}
+
+input ManagerProfileCreateOneWithoutNotificationsSettingsInput {
+  create: ManagerProfileCreateWithoutNotificationsSettingsInput
+  connect: ManagerProfileWhereUniqueInput
+}
+
+input ManagerProfileCreateOneWithoutQuizzesInput {
+  create: ManagerProfileCreateWithoutQuizzesInput
+  connect: ManagerProfileWhereUniqueInput
+}
+
+input ManagerProfileCreateOneWithoutReportersInput {
+  create: ManagerProfileCreateWithoutReportersInput
+  connect: ManagerProfileWhereUniqueInput
+}
+
+input ManagerProfileCreateOneWithoutUserInput {
+  create: ManagerProfileCreateWithoutUserInput
+  connect: ManagerProfileWhereUniqueInput
+}
+
+input ManagerProfileCreateWithoutCommentsInput {
+  userName: String
+  isAdmin: Boolean
+  isActive: Boolean!
+  decisions: DecisionCreateManyWithoutUserInput
+  notificationsSettings: NotificationSettingsCreateManyWithoutUserInput
+  quizzes: QuizCreateManyWithoutUserInput
+  reporters: ReporterProfileCreateManyWithoutManagerInput
+  user: UserCreateOneWithoutManagerProfileInput!
+}
+
+input ManagerProfileCreateWithoutDecisionsInput {
+  userName: String
+  isAdmin: Boolean
+  isActive: Boolean!
+  notificationsSettings: NotificationSettingsCreateManyWithoutUserInput
+  quizzes: QuizCreateManyWithoutUserInput
+  reporters: ReporterProfileCreateManyWithoutManagerInput
+  comments: CommentCreateManyWithoutUserInput
+  user: UserCreateOneWithoutManagerProfileInput!
+}
+
+input ManagerProfileCreateWithoutNotificationsSettingsInput {
+  userName: String
+  isAdmin: Boolean
+  isActive: Boolean!
+  decisions: DecisionCreateManyWithoutUserInput
+  quizzes: QuizCreateManyWithoutUserInput
+  reporters: ReporterProfileCreateManyWithoutManagerInput
+  comments: CommentCreateManyWithoutUserInput
+  user: UserCreateOneWithoutManagerProfileInput!
+}
+
+input ManagerProfileCreateWithoutQuizzesInput {
+  userName: String
+  isAdmin: Boolean
+  isActive: Boolean!
+  decisions: DecisionCreateManyWithoutUserInput
+  notificationsSettings: NotificationSettingsCreateManyWithoutUserInput
+  reporters: ReporterProfileCreateManyWithoutManagerInput
+  comments: CommentCreateManyWithoutUserInput
+  user: UserCreateOneWithoutManagerProfileInput!
+}
+
+input ManagerProfileCreateWithoutReportersInput {
+  userName: String
+  isAdmin: Boolean
+  isActive: Boolean!
+  decisions: DecisionCreateManyWithoutUserInput
+  notificationsSettings: NotificationSettingsCreateManyWithoutUserInput
+  quizzes: QuizCreateManyWithoutUserInput
+  comments: CommentCreateManyWithoutUserInput
+  user: UserCreateOneWithoutManagerProfileInput!
+}
+
+input ManagerProfileCreateWithoutUserInput {
+  userName: String
+  isAdmin: Boolean
+  isActive: Boolean!
+  decisions: DecisionCreateManyWithoutUserInput
+  notificationsSettings: NotificationSettingsCreateManyWithoutUserInput
+  quizzes: QuizCreateManyWithoutUserInput
+  reporters: ReporterProfileCreateManyWithoutManagerInput
+  comments: CommentCreateManyWithoutUserInput
+}
+
+"""An edge in a connection."""
+type ManagerProfileEdge {
+  """The item at the end of the edge."""
+  node: ManagerProfile!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ManagerProfileOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  userName_ASC
+  userName_DESC
+  isAdmin_ASC
+  isAdmin_DESC
+  isActive_ASC
+  isActive_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type ManagerProfilePreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  userName: String
+  isAdmin: Boolean
+  isActive: Boolean!
+}
+
+type ManagerProfileSubscriptionPayload {
+  mutation: MutationType!
+  node: ManagerProfile
+  updatedFields: [String!]
+  previousValues: ManagerProfilePreviousValues
+}
+
+input ManagerProfileSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ManagerProfileSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ManagerProfileSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ManagerProfileSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ManagerProfileWhereInput
+}
+
+input ManagerProfileUpdateInput {
+  userName: String
+  isAdmin: Boolean
+  isActive: Boolean
+  decisions: DecisionUpdateManyWithoutUserInput
+  notificationsSettings: NotificationSettingsUpdateManyWithoutUserInput
+  quizzes: QuizUpdateManyWithoutUserInput
+  reporters: ReporterProfileUpdateManyWithoutManagerInput
+  comments: CommentUpdateManyWithoutUserInput
+  user: UserUpdateOneWithoutManagerProfileInput
+}
+
+input ManagerProfileUpdateOneWithoutCommentsInput {
+  create: ManagerProfileCreateWithoutCommentsInput
+  connect: ManagerProfileWhereUniqueInput
+  delete: Boolean
+  update: ManagerProfileUpdateWithoutCommentsDataInput
+  upsert: ManagerProfileUpsertWithoutCommentsInput
+}
+
+input ManagerProfileUpdateOneWithoutDecisionsInput {
+  create: ManagerProfileCreateWithoutDecisionsInput
+  connect: ManagerProfileWhereUniqueInput
+  delete: Boolean
+  update: ManagerProfileUpdateWithoutDecisionsDataInput
+  upsert: ManagerProfileUpsertWithoutDecisionsInput
+}
+
+input ManagerProfileUpdateOneWithoutNotificationsSettingsInput {
+  create: ManagerProfileCreateWithoutNotificationsSettingsInput
+  connect: ManagerProfileWhereUniqueInput
+  delete: Boolean
+  update: ManagerProfileUpdateWithoutNotificationsSettingsDataInput
+  upsert: ManagerProfileUpsertWithoutNotificationsSettingsInput
+}
+
+input ManagerProfileUpdateOneWithoutQuizzesInput {
+  create: ManagerProfileCreateWithoutQuizzesInput
+  connect: ManagerProfileWhereUniqueInput
+  delete: Boolean
+  update: ManagerProfileUpdateWithoutQuizzesDataInput
+  upsert: ManagerProfileUpsertWithoutQuizzesInput
+}
+
+input ManagerProfileUpdateOneWithoutReportersInput {
+  create: ManagerProfileCreateWithoutReportersInput
+  connect: ManagerProfileWhereUniqueInput
+  delete: Boolean
+  update: ManagerProfileUpdateWithoutReportersDataInput
+  upsert: ManagerProfileUpsertWithoutReportersInput
+}
+
+input ManagerProfileUpdateOneWithoutUserInput {
+  create: ManagerProfileCreateWithoutUserInput
+  connect: ManagerProfileWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: ManagerProfileUpdateWithoutUserDataInput
+  upsert: ManagerProfileUpsertWithoutUserInput
+}
+
+input ManagerProfileUpdateWithoutCommentsDataInput {
+  userName: String
+  isAdmin: Boolean
+  isActive: Boolean
+  decisions: DecisionUpdateManyWithoutUserInput
+  notificationsSettings: NotificationSettingsUpdateManyWithoutUserInput
+  quizzes: QuizUpdateManyWithoutUserInput
+  reporters: ReporterProfileUpdateManyWithoutManagerInput
+  user: UserUpdateOneWithoutManagerProfileInput
+}
+
+input ManagerProfileUpdateWithoutDecisionsDataInput {
+  userName: String
+  isAdmin: Boolean
+  isActive: Boolean
+  notificationsSettings: NotificationSettingsUpdateManyWithoutUserInput
+  quizzes: QuizUpdateManyWithoutUserInput
+  reporters: ReporterProfileUpdateManyWithoutManagerInput
+  comments: CommentUpdateManyWithoutUserInput
+  user: UserUpdateOneWithoutManagerProfileInput
+}
+
+input ManagerProfileUpdateWithoutNotificationsSettingsDataInput {
+  userName: String
+  isAdmin: Boolean
+  isActive: Boolean
+  decisions: DecisionUpdateManyWithoutUserInput
+  quizzes: QuizUpdateManyWithoutUserInput
+  reporters: ReporterProfileUpdateManyWithoutManagerInput
+  comments: CommentUpdateManyWithoutUserInput
+  user: UserUpdateOneWithoutManagerProfileInput
+}
+
+input ManagerProfileUpdateWithoutQuizzesDataInput {
+  userName: String
+  isAdmin: Boolean
+  isActive: Boolean
+  decisions: DecisionUpdateManyWithoutUserInput
+  notificationsSettings: NotificationSettingsUpdateManyWithoutUserInput
+  reporters: ReporterProfileUpdateManyWithoutManagerInput
+  comments: CommentUpdateManyWithoutUserInput
+  user: UserUpdateOneWithoutManagerProfileInput
+}
+
+input ManagerProfileUpdateWithoutReportersDataInput {
+  userName: String
+  isAdmin: Boolean
+  isActive: Boolean
+  decisions: DecisionUpdateManyWithoutUserInput
+  notificationsSettings: NotificationSettingsUpdateManyWithoutUserInput
+  quizzes: QuizUpdateManyWithoutUserInput
+  comments: CommentUpdateManyWithoutUserInput
+  user: UserUpdateOneWithoutManagerProfileInput
+}
+
+input ManagerProfileUpdateWithoutUserDataInput {
+  userName: String
+  isAdmin: Boolean
+  isActive: Boolean
+  decisions: DecisionUpdateManyWithoutUserInput
+  notificationsSettings: NotificationSettingsUpdateManyWithoutUserInput
+  quizzes: QuizUpdateManyWithoutUserInput
+  reporters: ReporterProfileUpdateManyWithoutManagerInput
+  comments: CommentUpdateManyWithoutUserInput
+}
+
+input ManagerProfileUpsertWithoutCommentsInput {
+  update: ManagerProfileUpdateWithoutCommentsDataInput!
+  create: ManagerProfileCreateWithoutCommentsInput!
+}
+
+input ManagerProfileUpsertWithoutDecisionsInput {
+  update: ManagerProfileUpdateWithoutDecisionsDataInput!
+  create: ManagerProfileCreateWithoutDecisionsInput!
+}
+
+input ManagerProfileUpsertWithoutNotificationsSettingsInput {
+  update: ManagerProfileUpdateWithoutNotificationsSettingsDataInput!
+  create: ManagerProfileCreateWithoutNotificationsSettingsInput!
+}
+
+input ManagerProfileUpsertWithoutQuizzesInput {
+  update: ManagerProfileUpdateWithoutQuizzesDataInput!
+  create: ManagerProfileCreateWithoutQuizzesInput!
+}
+
+input ManagerProfileUpsertWithoutReportersInput {
+  update: ManagerProfileUpdateWithoutReportersDataInput!
+  create: ManagerProfileCreateWithoutReportersInput!
+}
+
+input ManagerProfileUpsertWithoutUserInput {
+  update: ManagerProfileUpdateWithoutUserDataInput!
+  create: ManagerProfileCreateWithoutUserInput!
+}
+
+input ManagerProfileWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ManagerProfileWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ManagerProfileWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ManagerProfileWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  userName: String
+
+  """All values that are not equal to given value."""
+  userName_not: String
+
+  """All values that are contained in given list."""
+  userName_in: [String!]
+
+  """All values that are not contained in given list."""
+  userName_not_in: [String!]
+
+  """All values less than the given value."""
+  userName_lt: String
+
+  """All values less than or equal the given value."""
+  userName_lte: String
+
+  """All values greater than the given value."""
+  userName_gt: String
+
+  """All values greater than or equal the given value."""
+  userName_gte: String
+
+  """All values containing the given string."""
+  userName_contains: String
+
+  """All values not containing the given string."""
+  userName_not_contains: String
+
+  """All values starting with the given string."""
+  userName_starts_with: String
+
+  """All values not starting with the given string."""
+  userName_not_starts_with: String
+
+  """All values ending with the given string."""
+  userName_ends_with: String
+
+  """All values not ending with the given string."""
+  userName_not_ends_with: String
+  isAdmin: Boolean
+
+  """All values that are not equal to given value."""
+  isAdmin_not: Boolean
+  isActive: Boolean
+
+  """All values that are not equal to given value."""
+  isActive_not: Boolean
+  decisions_every: DecisionWhereInput
+  decisions_some: DecisionWhereInput
+  decisions_none: DecisionWhereInput
+  notificationsSettings_every: NotificationSettingsWhereInput
+  notificationsSettings_some: NotificationSettingsWhereInput
+  notificationsSettings_none: NotificationSettingsWhereInput
+  quizzes_every: QuizWhereInput
+  quizzes_some: QuizWhereInput
+  quizzes_none: QuizWhereInput
+  reporters_every: ReporterProfileWhereInput
+  reporters_some: ReporterProfileWhereInput
+  reporters_none: ReporterProfileWhereInput
+  comments_every: CommentWhereInput
+  comments_some: CommentWhereInput
+  comments_none: CommentWhereInput
+  user: UserWhereInput
+}
+
+input ManagerProfileWhereUniqueInput {
+  id: ID
+}
+
+type Mutation {
+  createAnswer(data: AnswerCreateInput!): Answer!
+  createComment(data: CommentCreateInput!): Comment!
+  createDecision(data: DecisionCreateInput!): Decision!
+  createFile(data: FileCreateInput!): File!
+  createNotificationSettings(data: NotificationSettingsCreateInput!): NotificationSettings!
+  createOnQuizStatusChange(data: OnQuizStatusChangeCreateInput!): OnQuizStatusChange!
+  createQuestion(data: QuestionCreateInput!): Question!
+  createQuiz(data: QuizCreateInput!): Quiz!
+  createReport(data: ReportCreateInput!): Report!
+  createUser(data: UserCreateInput!): User!
+  createManagerProfile(data: ManagerProfileCreateInput!): ManagerProfile!
+  createReporterProfile(data: ReporterProfileCreateInput!): ReporterProfile!
+  updateAnswer(data: AnswerUpdateInput!, where: AnswerWhereUniqueInput!): Answer
+  updateComment(data: CommentUpdateInput!, where: CommentWhereUniqueInput!): Comment
+  updateDecision(data: DecisionUpdateInput!, where: DecisionWhereUniqueInput!): Decision
+  updateFile(data: FileUpdateInput!, where: FileWhereUniqueInput!): File
+  updateNotificationSettings(data: NotificationSettingsUpdateInput!, where: NotificationSettingsWhereUniqueInput!): NotificationSettings
+  updateOnQuizStatusChange(data: OnQuizStatusChangeUpdateInput!, where: OnQuizStatusChangeWhereUniqueInput!): OnQuizStatusChange
+  updateQuestion(data: QuestionUpdateInput!, where: QuestionWhereUniqueInput!): Question
+  updateQuiz(data: QuizUpdateInput!, where: QuizWhereUniqueInput!): Quiz
+  updateReport(data: ReportUpdateInput!, where: ReportWhereUniqueInput!): Report
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateManagerProfile(data: ManagerProfileUpdateInput!, where: ManagerProfileWhereUniqueInput!): ManagerProfile
+  updateReporterProfile(data: ReporterProfileUpdateInput!, where: ReporterProfileWhereUniqueInput!): ReporterProfile
+  deleteAnswer(where: AnswerWhereUniqueInput!): Answer
+  deleteComment(where: CommentWhereUniqueInput!): Comment
+  deleteDecision(where: DecisionWhereUniqueInput!): Decision
+  deleteFile(where: FileWhereUniqueInput!): File
+  deleteNotificationSettings(where: NotificationSettingsWhereUniqueInput!): NotificationSettings
+  deleteOnQuizStatusChange(where: OnQuizStatusChangeWhereUniqueInput!): OnQuizStatusChange
+  deleteQuestion(where: QuestionWhereUniqueInput!): Question
+  deleteQuiz(where: QuizWhereUniqueInput!): Quiz
+  deleteReport(where: ReportWhereUniqueInput!): Report
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteManagerProfile(where: ManagerProfileWhereUniqueInput!): ManagerProfile
+  deleteReporterProfile(where: ReporterProfileWhereUniqueInput!): ReporterProfile
+  upsertAnswer(where: AnswerWhereUniqueInput!, create: AnswerCreateInput!, update: AnswerUpdateInput!): Answer!
+  upsertComment(where: CommentWhereUniqueInput!, create: CommentCreateInput!, update: CommentUpdateInput!): Comment!
+  upsertDecision(where: DecisionWhereUniqueInput!, create: DecisionCreateInput!, update: DecisionUpdateInput!): Decision!
+  upsertFile(where: FileWhereUniqueInput!, create: FileCreateInput!, update: FileUpdateInput!): File!
+  upsertNotificationSettings(where: NotificationSettingsWhereUniqueInput!, create: NotificationSettingsCreateInput!, update: NotificationSettingsUpdateInput!): NotificationSettings!
+  upsertOnQuizStatusChange(where: OnQuizStatusChangeWhereUniqueInput!, create: OnQuizStatusChangeCreateInput!, update: OnQuizStatusChangeUpdateInput!): OnQuizStatusChange!
+  upsertQuestion(where: QuestionWhereUniqueInput!, create: QuestionCreateInput!, update: QuestionUpdateInput!): Question!
+  upsertQuiz(where: QuizWhereUniqueInput!, create: QuizCreateInput!, update: QuizUpdateInput!): Quiz!
+  upsertReport(where: ReportWhereUniqueInput!, create: ReportCreateInput!, update: ReportUpdateInput!): Report!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertManagerProfile(where: ManagerProfileWhereUniqueInput!, create: ManagerProfileCreateInput!, update: ManagerProfileUpdateInput!): ManagerProfile!
+  upsertReporterProfile(where: ReporterProfileWhereUniqueInput!, create: ReporterProfileCreateInput!, update: ReporterProfileUpdateInput!): ReporterProfile!
+  updateManyAnswers(data: AnswerUpdateInput!, where: AnswerWhereInput): BatchPayload!
+  updateManyComments(data: CommentUpdateInput!, where: CommentWhereInput): BatchPayload!
+  updateManyDecisions(data: DecisionUpdateInput!, where: DecisionWhereInput): BatchPayload!
+  updateManyFiles(data: FileUpdateInput!, where: FileWhereInput): BatchPayload!
+  updateManyNotificationSettingses(data: NotificationSettingsUpdateInput!, where: NotificationSettingsWhereInput): BatchPayload!
+  updateManyOnQuizStatusChanges(data: OnQuizStatusChangeUpdateInput!, where: OnQuizStatusChangeWhereInput): BatchPayload!
+  updateManyQuestions(data: QuestionUpdateInput!, where: QuestionWhereInput): BatchPayload!
+  updateManyQuizzes(data: QuizUpdateInput!, where: QuizWhereInput): BatchPayload!
+  updateManyReports(data: ReportUpdateInput!, where: ReportWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  updateManyManagerProfiles(data: ManagerProfileUpdateInput!, where: ManagerProfileWhereInput): BatchPayload!
+  updateManyReporterProfiles(data: ReporterProfileUpdateInput!, where: ReporterProfileWhereInput): BatchPayload!
+  deleteManyAnswers(where: AnswerWhereInput): BatchPayload!
+  deleteManyComments(where: CommentWhereInput): BatchPayload!
+  deleteManyDecisions(where: DecisionWhereInput): BatchPayload!
+  deleteManyFiles(where: FileWhereInput): BatchPayload!
+  deleteManyNotificationSettingses(where: NotificationSettingsWhereInput): BatchPayload!
+  deleteManyOnQuizStatusChanges(where: OnQuizStatusChangeWhereInput): BatchPayload!
+  deleteManyQuestions(where: QuestionWhereInput): BatchPayload!
+  deleteManyQuizzes(where: QuizWhereInput): BatchPayload!
+  deleteManyReports(where: ReportWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyManagerProfiles(where: ManagerProfileWhereInput): BatchPayload!
+  deleteManyReporterProfiles(where: ReporterProfileWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+type NotificationSettings implements Node {
+  id: ID!
+  onQuizStatusChange(where: OnQuizStatusChangeWhereInput): OnQuizStatusChange!
+  user(where: ManagerProfileWhereInput): ManagerProfile!
+}
+
+"""A connection to a list of items."""
+type NotificationSettingsConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [NotificationSettingsEdge]!
+  aggregate: AggregateNotificationSettings!
+}
+
+input NotificationSettingsCreateInput {
+  onQuizStatusChange: OnQuizStatusChangeCreateOneWithoutNotificationSettingsInput!
+  user: ManagerProfileCreateOneWithoutNotificationsSettingsInput!
+}
+
+input NotificationSettingsCreateManyWithoutUserInput {
+  create: [NotificationSettingsCreateWithoutUserInput!]
+  connect: [NotificationSettingsWhereUniqueInput!]
+}
+
+input NotificationSettingsCreateOneWithoutOnQuizStatusChangeInput {
+  create: NotificationSettingsCreateWithoutOnQuizStatusChangeInput
+  connect: NotificationSettingsWhereUniqueInput
+}
+
+input NotificationSettingsCreateWithoutOnQuizStatusChangeInput {
+  user: ManagerProfileCreateOneWithoutNotificationsSettingsInput!
+}
+
+input NotificationSettingsCreateWithoutUserInput {
+  onQuizStatusChange: OnQuizStatusChangeCreateOneWithoutNotificationSettingsInput!
+}
+
+"""An edge in a connection."""
+type NotificationSettingsEdge {
+  """The item at the end of the edge."""
+  node: NotificationSettings!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum NotificationSettingsOrderByInput {
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type NotificationSettingsPreviousValues {
+  id: ID!
+}
+
+type NotificationSettingsSubscriptionPayload {
+  mutation: MutationType!
+  node: NotificationSettings
+  updatedFields: [String!]
+  previousValues: NotificationSettingsPreviousValues
+}
+
+input NotificationSettingsSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [NotificationSettingsSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [NotificationSettingsSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [NotificationSettingsSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: NotificationSettingsWhereInput
+}
+
+input NotificationSettingsUpdateInput {
+  onQuizStatusChange: OnQuizStatusChangeUpdateOneWithoutNotificationSettingsInput
+  user: ManagerProfileUpdateOneWithoutNotificationsSettingsInput
+}
+
+input NotificationSettingsUpdateManyWithoutUserInput {
+  create: [NotificationSettingsCreateWithoutUserInput!]
+  connect: [NotificationSettingsWhereUniqueInput!]
+  disconnect: [NotificationSettingsWhereUniqueInput!]
+  delete: [NotificationSettingsWhereUniqueInput!]
+  update: [NotificationSettingsUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [NotificationSettingsUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input NotificationSettingsUpdateOneWithoutOnQuizStatusChangeInput {
+  create: NotificationSettingsCreateWithoutOnQuizStatusChangeInput
+  connect: NotificationSettingsWhereUniqueInput
+  delete: Boolean
+  update: NotificationSettingsUpdateWithoutOnQuizStatusChangeDataInput
+  upsert: NotificationSettingsUpsertWithoutOnQuizStatusChangeInput
+}
+
+input NotificationSettingsUpdateWithoutOnQuizStatusChangeDataInput {
+  user: ManagerProfileUpdateOneWithoutNotificationsSettingsInput
+}
+
+input NotificationSettingsUpdateWithoutUserDataInput {
+  onQuizStatusChange: OnQuizStatusChangeUpdateOneWithoutNotificationSettingsInput
+}
+
+input NotificationSettingsUpdateWithWhereUniqueWithoutUserInput {
+  where: NotificationSettingsWhereUniqueInput!
+  data: NotificationSettingsUpdateWithoutUserDataInput!
+}
+
+input NotificationSettingsUpsertWithoutOnQuizStatusChangeInput {
+  update: NotificationSettingsUpdateWithoutOnQuizStatusChangeDataInput!
+  create: NotificationSettingsCreateWithoutOnQuizStatusChangeInput!
+}
+
+input NotificationSettingsUpsertWithWhereUniqueWithoutUserInput {
+  where: NotificationSettingsWhereUniqueInput!
+  update: NotificationSettingsUpdateWithoutUserDataInput!
+  create: NotificationSettingsCreateWithoutUserInput!
+}
+
+input NotificationSettingsWhereInput {
+  """Logical AND on all given filters."""
+  AND: [NotificationSettingsWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [NotificationSettingsWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [NotificationSettingsWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  onQuizStatusChange: OnQuizStatusChangeWhereInput
+  user: ManagerProfileWhereInput
+}
+
+input NotificationSettingsWhereUniqueInput {
+  id: ID
+}
+
+type OnQuizStatusChange implements Node {
+  content: String!
+  enabled: Boolean!
+  id: ID!
+  notificationSettings(where: NotificationSettingsWhereInput): NotificationSettings!
+}
+
+"""A connection to a list of items."""
+type OnQuizStatusChangeConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [OnQuizStatusChangeEdge]!
+  aggregate: AggregateOnQuizStatusChange!
+}
+
+input OnQuizStatusChangeCreateInput {
+  content: String
+  enabled: Boolean
+  notificationSettings: NotificationSettingsCreateOneWithoutOnQuizStatusChangeInput!
+}
+
+input OnQuizStatusChangeCreateOneWithoutNotificationSettingsInput {
+  create: OnQuizStatusChangeCreateWithoutNotificationSettingsInput
+  connect: OnQuizStatusChangeWhereUniqueInput
+}
+
+input OnQuizStatusChangeCreateWithoutNotificationSettingsInput {
+  content: String
+  enabled: Boolean
+}
+
+"""An edge in a connection."""
+type OnQuizStatusChangeEdge {
+  """The item at the end of the edge."""
+  node: OnQuizStatusChange!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum OnQuizStatusChangeOrderByInput {
+  content_ASC
+  content_DESC
+  enabled_ASC
+  enabled_DESC
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type OnQuizStatusChangePreviousValues {
+  content: String!
+  enabled: Boolean!
+  id: ID!
+}
+
+type OnQuizStatusChangeSubscriptionPayload {
+  mutation: MutationType!
+  node: OnQuizStatusChange
+  updatedFields: [String!]
+  previousValues: OnQuizStatusChangePreviousValues
+}
+
+input OnQuizStatusChangeSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [OnQuizStatusChangeSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [OnQuizStatusChangeSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [OnQuizStatusChangeSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: OnQuizStatusChangeWhereInput
+}
+
+input OnQuizStatusChangeUpdateInput {
+  content: String
+  enabled: Boolean
+  notificationSettings: NotificationSettingsUpdateOneWithoutOnQuizStatusChangeInput
+}
+
+input OnQuizStatusChangeUpdateOneWithoutNotificationSettingsInput {
+  create: OnQuizStatusChangeCreateWithoutNotificationSettingsInput
+  connect: OnQuizStatusChangeWhereUniqueInput
+  delete: Boolean
+  update: OnQuizStatusChangeUpdateWithoutNotificationSettingsDataInput
+  upsert: OnQuizStatusChangeUpsertWithoutNotificationSettingsInput
+}
+
+input OnQuizStatusChangeUpdateWithoutNotificationSettingsDataInput {
+  content: String
+  enabled: Boolean
+}
+
+input OnQuizStatusChangeUpsertWithoutNotificationSettingsInput {
+  update: OnQuizStatusChangeUpdateWithoutNotificationSettingsDataInput!
+  create: OnQuizStatusChangeCreateWithoutNotificationSettingsInput!
+}
+
+input OnQuizStatusChangeWhereInput {
+  """Logical AND on all given filters."""
+  AND: [OnQuizStatusChangeWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [OnQuizStatusChangeWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [OnQuizStatusChangeWhereInput!]
+  content: String
+
+  """All values that are not equal to given value."""
+  content_not: String
+
+  """All values that are contained in given list."""
+  content_in: [String!]
+
+  """All values that are not contained in given list."""
+  content_not_in: [String!]
+
+  """All values less than the given value."""
+  content_lt: String
+
+  """All values less than or equal the given value."""
+  content_lte: String
+
+  """All values greater than the given value."""
+  content_gt: String
+
+  """All values greater than or equal the given value."""
+  content_gte: String
+
+  """All values containing the given string."""
+  content_contains: String
+
+  """All values not containing the given string."""
+  content_not_contains: String
+
+  """All values starting with the given string."""
+  content_starts_with: String
+
+  """All values not starting with the given string."""
+  content_not_starts_with: String
+
+  """All values ending with the given string."""
+  content_ends_with: String
+
+  """All values not ending with the given string."""
+  content_not_ends_with: String
+  enabled: Boolean
+
+  """All values that are not equal to given value."""
+  enabled_not: Boolean
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  notificationSettings: NotificationSettingsWhereInput
+}
+
+input OnQuizStatusChangeWhereUniqueInput {
+  id: ID
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Query {
+  answers(where: AnswerWhereInput, orderBy: AnswerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Answer]!
+  comments(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Comment]!
+  decisions(where: DecisionWhereInput, orderBy: DecisionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Decision]!
+  files(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [File]!
+  notificationSettingses(where: NotificationSettingsWhereInput, orderBy: NotificationSettingsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [NotificationSettings]!
+  onQuizStatusChanges(where: OnQuizStatusChangeWhereInput, orderBy: OnQuizStatusChangeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [OnQuizStatusChange]!
+  questions(where: QuestionWhereInput, orderBy: QuestionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Question]!
+  quizzes(where: QuizWhereInput, orderBy: QuizOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Quiz]!
+  reports(where: ReportWhereInput, orderBy: ReportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Report]!
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  managerProfiles(where: ManagerProfileWhereInput, orderBy: ManagerProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ManagerProfile]!
+  reporterProfiles(where: ReporterProfileWhereInput, orderBy: ReporterProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ReporterProfile]!
+  answer(where: AnswerWhereUniqueInput!): Answer
+  comment(where: CommentWhereUniqueInput!): Comment
+  decision(where: DecisionWhereUniqueInput!): Decision
+  file(where: FileWhereUniqueInput!): File
+  notificationSettings(where: NotificationSettingsWhereUniqueInput!): NotificationSettings
+  onQuizStatusChange(where: OnQuizStatusChangeWhereUniqueInput!): OnQuizStatusChange
+  question(where: QuestionWhereUniqueInput!): Question
+  quiz(where: QuizWhereUniqueInput!): Quiz
+  report(where: ReportWhereUniqueInput!): Report
+  user(where: UserWhereUniqueInput!): User
+  managerProfile(where: ManagerProfileWhereUniqueInput!): ManagerProfile
+  reporterProfile(where: ReporterProfileWhereUniqueInput!): ReporterProfile
+  answersConnection(where: AnswerWhereInput, orderBy: AnswerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): AnswerConnection!
+  commentsConnection(where: CommentWhereInput, orderBy: CommentOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): CommentConnection!
+  decisionsConnection(where: DecisionWhereInput, orderBy: DecisionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DecisionConnection!
+  filesConnection(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FileConnection!
+  notificationSettingsesConnection(where: NotificationSettingsWhereInput, orderBy: NotificationSettingsOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): NotificationSettingsConnection!
+  onQuizStatusChangesConnection(where: OnQuizStatusChangeWhereInput, orderBy: OnQuizStatusChangeOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OnQuizStatusChangeConnection!
+  questionsConnection(where: QuestionWhereInput, orderBy: QuestionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuestionConnection!
+  quizzesConnection(where: QuizWhereInput, orderBy: QuizOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): QuizConnection!
+  reportsConnection(where: ReportWhereInput, orderBy: ReportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ReportConnection!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  managerProfilesConnection(where: ManagerProfileWhereInput, orderBy: ManagerProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ManagerProfileConnection!
+  reporterProfilesConnection(where: ReporterProfileWhereInput, orderBy: ReporterProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ReporterProfileConnection!
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+}
+
+type Question implements Node {
+  answer: String
+  defaultText: String!
+  description: String!
+  id: ID!
+  options: [String!]
+  order: Int!
+  quiz(where: QuizWhereInput): Quiz!
+  title: String!
+  type: String!
+  unanswered: Int!
+}
+
+"""A connection to a list of items."""
+type QuestionConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [QuestionEdge]!
+  aggregate: AggregateQuestion!
+}
+
+input QuestionCreateInput {
+  answer: String
+  defaultText: String!
+  description: String!
+  order: Int!
+  title: String!
+  type: String!
+  unanswered: Int!
+  options: QuestionCreateoptionsInput
+  quiz: QuizCreateOneWithoutQuestionsInput!
+}
+
+input QuestionCreateManyWithoutQuizInput {
+  create: [QuestionCreateWithoutQuizInput!]
+  connect: [QuestionWhereUniqueInput!]
+}
+
+input QuestionCreateoptionsInput {
+  set: [String!]
+}
+
+input QuestionCreateWithoutQuizInput {
+  answer: String
+  defaultText: String!
+  description: String!
+  order: Int!
+  title: String!
+  type: String!
+  unanswered: Int!
+  options: QuestionCreateoptionsInput
+}
+
+"""An edge in a connection."""
+type QuestionEdge {
+  """The item at the end of the edge."""
+  node: Question!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum QuestionOrderByInput {
+  answer_ASC
+  answer_DESC
+  defaultText_ASC
+  defaultText_DESC
+  description_ASC
+  description_DESC
+  id_ASC
+  id_DESC
+  order_ASC
+  order_DESC
+  title_ASC
+  title_DESC
+  type_ASC
+  type_DESC
+  unanswered_ASC
+  unanswered_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type QuestionPreviousValues {
+  answer: String
+  defaultText: String!
+  description: String!
+  id: ID!
+  options: [String!]
+  order: Int!
+  title: String!
+  type: String!
+  unanswered: Int!
+}
+
+type QuestionSubscriptionPayload {
+  mutation: MutationType!
+  node: Question
+  updatedFields: [String!]
+  previousValues: QuestionPreviousValues
+}
+
+input QuestionSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [QuestionSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [QuestionSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [QuestionSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: QuestionWhereInput
+}
+
+input QuestionUpdateInput {
+  answer: String
+  defaultText: String
+  description: String
+  order: Int
+  title: String
+  type: String
+  unanswered: Int
+  options: QuestionUpdateoptionsInput
+  quiz: QuizUpdateOneWithoutQuestionsInput
+}
+
+input QuestionUpdateManyWithoutQuizInput {
+  create: [QuestionCreateWithoutQuizInput!]
+  connect: [QuestionWhereUniqueInput!]
+  disconnect: [QuestionWhereUniqueInput!]
+  delete: [QuestionWhereUniqueInput!]
+  update: [QuestionUpdateWithWhereUniqueWithoutQuizInput!]
+  upsert: [QuestionUpsertWithWhereUniqueWithoutQuizInput!]
+}
+
+input QuestionUpdateoptionsInput {
+  set: [String!]
+}
+
+input QuestionUpdateWithoutQuizDataInput {
+  answer: String
+  defaultText: String
+  description: String
+  order: Int
+  title: String
+  type: String
+  unanswered: Int
+  options: QuestionUpdateoptionsInput
+}
+
+input QuestionUpdateWithWhereUniqueWithoutQuizInput {
+  where: QuestionWhereUniqueInput!
+  data: QuestionUpdateWithoutQuizDataInput!
+}
+
+input QuestionUpsertWithWhereUniqueWithoutQuizInput {
+  where: QuestionWhereUniqueInput!
+  update: QuestionUpdateWithoutQuizDataInput!
+  create: QuestionCreateWithoutQuizInput!
+}
+
+input QuestionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [QuestionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [QuestionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [QuestionWhereInput!]
+  answer: String
+
+  """All values that are not equal to given value."""
+  answer_not: String
+
+  """All values that are contained in given list."""
+  answer_in: [String!]
+
+  """All values that are not contained in given list."""
+  answer_not_in: [String!]
+
+  """All values less than the given value."""
+  answer_lt: String
+
+  """All values less than or equal the given value."""
+  answer_lte: String
+
+  """All values greater than the given value."""
+  answer_gt: String
+
+  """All values greater than or equal the given value."""
+  answer_gte: String
+
+  """All values containing the given string."""
+  answer_contains: String
+
+  """All values not containing the given string."""
+  answer_not_contains: String
+
+  """All values starting with the given string."""
+  answer_starts_with: String
+
+  """All values not starting with the given string."""
+  answer_not_starts_with: String
+
+  """All values ending with the given string."""
+  answer_ends_with: String
+
+  """All values not ending with the given string."""
+  answer_not_ends_with: String
+  defaultText: String
+
+  """All values that are not equal to given value."""
+  defaultText_not: String
+
+  """All values that are contained in given list."""
+  defaultText_in: [String!]
+
+  """All values that are not contained in given list."""
+  defaultText_not_in: [String!]
+
+  """All values less than the given value."""
+  defaultText_lt: String
+
+  """All values less than or equal the given value."""
+  defaultText_lte: String
+
+  """All values greater than the given value."""
+  defaultText_gt: String
+
+  """All values greater than or equal the given value."""
+  defaultText_gte: String
+
+  """All values containing the given string."""
+  defaultText_contains: String
+
+  """All values not containing the given string."""
+  defaultText_not_contains: String
+
+  """All values starting with the given string."""
+  defaultText_starts_with: String
+
+  """All values not starting with the given string."""
+  defaultText_not_starts_with: String
+
+  """All values ending with the given string."""
+  defaultText_ends_with: String
+
+  """All values not ending with the given string."""
+  defaultText_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  order: Int
+
+  """All values that are not equal to given value."""
+  order_not: Int
+
+  """All values that are contained in given list."""
+  order_in: [Int!]
+
+  """All values that are not contained in given list."""
+  order_not_in: [Int!]
+
+  """All values less than the given value."""
+  order_lt: Int
+
+  """All values less than or equal the given value."""
+  order_lte: Int
+
+  """All values greater than the given value."""
+  order_gt: Int
+
+  """All values greater than or equal the given value."""
+  order_gte: Int
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  type: String
+
+  """All values that are not equal to given value."""
+  type_not: String
+
+  """All values that are contained in given list."""
+  type_in: [String!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [String!]
+
+  """All values less than the given value."""
+  type_lt: String
+
+  """All values less than or equal the given value."""
+  type_lte: String
+
+  """All values greater than the given value."""
+  type_gt: String
+
+  """All values greater than or equal the given value."""
+  type_gte: String
+
+  """All values containing the given string."""
+  type_contains: String
+
+  """All values not containing the given string."""
+  type_not_contains: String
+
+  """All values starting with the given string."""
+  type_starts_with: String
+
+  """All values not starting with the given string."""
+  type_not_starts_with: String
+
+  """All values ending with the given string."""
+  type_ends_with: String
+
+  """All values not ending with the given string."""
+  type_not_ends_with: String
+  unanswered: Int
+
+  """All values that are not equal to given value."""
+  unanswered_not: Int
+
+  """All values that are contained in given list."""
+  unanswered_in: [Int!]
+
+  """All values that are not contained in given list."""
+  unanswered_not_in: [Int!]
+
+  """All values less than the given value."""
+  unanswered_lt: Int
+
+  """All values less than or equal the given value."""
+  unanswered_lte: Int
+
+  """All values greater than the given value."""
+  unanswered_gt: Int
+
+  """All values greater than or equal the given value."""
+  unanswered_gte: Int
+  quiz: QuizWhereInput
+}
+
+input QuestionWhereUniqueInput {
+  id: ID
+}
+
+type Quiz implements Node {
+  checkLocation: Boolean!
+  creationDate: DateTime!
+  decision(where: DecisionWhereInput): Decision
+  id: ID!
+  lastUpdated: DateTime
+  publishDate: DateTime
+  questions(where: QuestionWhereInput, orderBy: QuestionOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Question!]
+  reporters(where: ReporterProfileWhereInput, orderBy: ReporterProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ReporterProfile!]
+  reports(where: ReportWhereInput, orderBy: ReportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Report!]
+  status: String!
+  timing: DateTime!
+  title: String!
+  type: String!
+  user(where: ManagerProfileWhereInput): ManagerProfile!
+}
+
+"""A connection to a list of items."""
+type QuizConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [QuizEdge]!
+  aggregate: AggregateQuiz!
+}
+
+input QuizCreateInput {
+  checkLocation: Boolean
+  creationDate: DateTime!
+  lastUpdated: DateTime
+  publishDate: DateTime
+  status: String!
+  timing: DateTime!
+  title: String!
+  type: String!
+  decision: DecisionCreateOneWithoutQuizzesInput
+  questions: QuestionCreateManyWithoutQuizInput
+  reporters: ReporterProfileCreateManyInput
+  reports: ReportCreateManyWithoutQuizInput
+  user: ManagerProfileCreateOneWithoutQuizzesInput!
+}
+
+input QuizCreateManyInput {
+  create: [QuizCreateInput!]
+  connect: [QuizWhereUniqueInput!]
+}
+
+input QuizCreateManyWithoutDecisionInput {
+  create: [QuizCreateWithoutDecisionInput!]
+  connect: [QuizWhereUniqueInput!]
+}
+
+input QuizCreateManyWithoutUserInput {
+  create: [QuizCreateWithoutUserInput!]
+  connect: [QuizWhereUniqueInput!]
+}
+
+input QuizCreateOneWithoutQuestionsInput {
+  create: QuizCreateWithoutQuestionsInput
+  connect: QuizWhereUniqueInput
+}
+
+input QuizCreateOneWithoutReportsInput {
+  create: QuizCreateWithoutReportsInput
+  connect: QuizWhereUniqueInput
+}
+
+input QuizCreateWithoutDecisionInput {
+  checkLocation: Boolean
+  creationDate: DateTime!
+  lastUpdated: DateTime
+  publishDate: DateTime
+  status: String!
+  timing: DateTime!
+  title: String!
+  type: String!
+  questions: QuestionCreateManyWithoutQuizInput
+  reporters: ReporterProfileCreateManyInput
+  reports: ReportCreateManyWithoutQuizInput
+  user: ManagerProfileCreateOneWithoutQuizzesInput!
+}
+
+input QuizCreateWithoutQuestionsInput {
+  checkLocation: Boolean
+  creationDate: DateTime!
+  lastUpdated: DateTime
+  publishDate: DateTime
+  status: String!
+  timing: DateTime!
+  title: String!
+  type: String!
+  decision: DecisionCreateOneWithoutQuizzesInput
+  reporters: ReporterProfileCreateManyInput
+  reports: ReportCreateManyWithoutQuizInput
+  user: ManagerProfileCreateOneWithoutQuizzesInput!
+}
+
+input QuizCreateWithoutReportsInput {
+  checkLocation: Boolean
+  creationDate: DateTime!
+  lastUpdated: DateTime
+  publishDate: DateTime
+  status: String!
+  timing: DateTime!
+  title: String!
+  type: String!
+  decision: DecisionCreateOneWithoutQuizzesInput
+  questions: QuestionCreateManyWithoutQuizInput
+  reporters: ReporterProfileCreateManyInput
+  user: ManagerProfileCreateOneWithoutQuizzesInput!
+}
+
+input QuizCreateWithoutUserInput {
+  checkLocation: Boolean
+  creationDate: DateTime!
+  lastUpdated: DateTime
+  publishDate: DateTime
+  status: String!
+  timing: DateTime!
+  title: String!
+  type: String!
+  decision: DecisionCreateOneWithoutQuizzesInput
+  questions: QuestionCreateManyWithoutQuizInput
+  reporters: ReporterProfileCreateManyInput
+  reports: ReportCreateManyWithoutQuizInput
+}
+
+"""An edge in a connection."""
+type QuizEdge {
+  """The item at the end of the edge."""
+  node: Quiz!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum QuizOrderByInput {
+  checkLocation_ASC
+  checkLocation_DESC
+  creationDate_ASC
+  creationDate_DESC
+  id_ASC
+  id_DESC
+  lastUpdated_ASC
+  lastUpdated_DESC
+  publishDate_ASC
+  publishDate_DESC
+  status_ASC
+  status_DESC
+  timing_ASC
+  timing_DESC
+  title_ASC
+  title_DESC
+  type_ASC
+  type_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type QuizPreviousValues {
+  checkLocation: Boolean!
+  creationDate: DateTime!
+  id: ID!
+  lastUpdated: DateTime
+  publishDate: DateTime
+  status: String!
+  timing: DateTime!
+  title: String!
+  type: String!
+}
+
+type QuizSubscriptionPayload {
+  mutation: MutationType!
+  node: Quiz
+  updatedFields: [String!]
+  previousValues: QuizPreviousValues
+}
+
+input QuizSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [QuizSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [QuizSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [QuizSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: QuizWhereInput
+}
+
+input QuizUpdateDataInput {
+  checkLocation: Boolean
+  creationDate: DateTime
+  lastUpdated: DateTime
+  publishDate: DateTime
+  status: String
+  timing: DateTime
+  title: String
+  type: String
+  decision: DecisionUpdateOneWithoutQuizzesInput
+  questions: QuestionUpdateManyWithoutQuizInput
+  reporters: ReporterProfileUpdateManyInput
+  reports: ReportUpdateManyWithoutQuizInput
+  user: ManagerProfileUpdateOneWithoutQuizzesInput
+}
+
+input QuizUpdateInput {
+  checkLocation: Boolean
+  creationDate: DateTime
+  lastUpdated: DateTime
+  publishDate: DateTime
+  status: String
+  timing: DateTime
+  title: String
+  type: String
+  decision: DecisionUpdateOneWithoutQuizzesInput
+  questions: QuestionUpdateManyWithoutQuizInput
+  reporters: ReporterProfileUpdateManyInput
+  reports: ReportUpdateManyWithoutQuizInput
+  user: ManagerProfileUpdateOneWithoutQuizzesInput
+}
+
+input QuizUpdateManyInput {
+  create: [QuizCreateInput!]
+  connect: [QuizWhereUniqueInput!]
+  disconnect: [QuizWhereUniqueInput!]
+  delete: [QuizWhereUniqueInput!]
+  update: [QuizUpdateWithWhereUniqueNestedInput!]
+  upsert: [QuizUpsertWithWhereUniqueNestedInput!]
+}
+
+input QuizUpdateManyWithoutDecisionInput {
+  create: [QuizCreateWithoutDecisionInput!]
+  connect: [QuizWhereUniqueInput!]
+  disconnect: [QuizWhereUniqueInput!]
+  delete: [QuizWhereUniqueInput!]
+  update: [QuizUpdateWithWhereUniqueWithoutDecisionInput!]
+  upsert: [QuizUpsertWithWhereUniqueWithoutDecisionInput!]
+}
+
+input QuizUpdateManyWithoutUserInput {
+  create: [QuizCreateWithoutUserInput!]
+  connect: [QuizWhereUniqueInput!]
+  disconnect: [QuizWhereUniqueInput!]
+  delete: [QuizWhereUniqueInput!]
+  update: [QuizUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [QuizUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input QuizUpdateOneWithoutQuestionsInput {
+  create: QuizCreateWithoutQuestionsInput
+  connect: QuizWhereUniqueInput
+  delete: Boolean
+  update: QuizUpdateWithoutQuestionsDataInput
+  upsert: QuizUpsertWithoutQuestionsInput
+}
+
+input QuizUpdateOneWithoutReportsInput {
+  create: QuizCreateWithoutReportsInput
+  connect: QuizWhereUniqueInput
+  delete: Boolean
+  update: QuizUpdateWithoutReportsDataInput
+  upsert: QuizUpsertWithoutReportsInput
+}
+
+input QuizUpdateWithoutDecisionDataInput {
+  checkLocation: Boolean
+  creationDate: DateTime
+  lastUpdated: DateTime
+  publishDate: DateTime
+  status: String
+  timing: DateTime
+  title: String
+  type: String
+  questions: QuestionUpdateManyWithoutQuizInput
+  reporters: ReporterProfileUpdateManyInput
+  reports: ReportUpdateManyWithoutQuizInput
+  user: ManagerProfileUpdateOneWithoutQuizzesInput
+}
+
+input QuizUpdateWithoutQuestionsDataInput {
+  checkLocation: Boolean
+  creationDate: DateTime
+  lastUpdated: DateTime
+  publishDate: DateTime
+  status: String
+  timing: DateTime
+  title: String
+  type: String
+  decision: DecisionUpdateOneWithoutQuizzesInput
+  reporters: ReporterProfileUpdateManyInput
+  reports: ReportUpdateManyWithoutQuizInput
+  user: ManagerProfileUpdateOneWithoutQuizzesInput
+}
+
+input QuizUpdateWithoutReportsDataInput {
+  checkLocation: Boolean
+  creationDate: DateTime
+  lastUpdated: DateTime
+  publishDate: DateTime
+  status: String
+  timing: DateTime
+  title: String
+  type: String
+  decision: DecisionUpdateOneWithoutQuizzesInput
+  questions: QuestionUpdateManyWithoutQuizInput
+  reporters: ReporterProfileUpdateManyInput
+  user: ManagerProfileUpdateOneWithoutQuizzesInput
+}
+
+input QuizUpdateWithoutUserDataInput {
+  checkLocation: Boolean
+  creationDate: DateTime
+  lastUpdated: DateTime
+  publishDate: DateTime
+  status: String
+  timing: DateTime
+  title: String
+  type: String
+  decision: DecisionUpdateOneWithoutQuizzesInput
+  questions: QuestionUpdateManyWithoutQuizInput
+  reporters: ReporterProfileUpdateManyInput
+  reports: ReportUpdateManyWithoutQuizInput
+}
+
+input QuizUpdateWithWhereUniqueNestedInput {
+  where: QuizWhereUniqueInput!
+  data: QuizUpdateDataInput!
+}
+
+input QuizUpdateWithWhereUniqueWithoutDecisionInput {
+  where: QuizWhereUniqueInput!
+  data: QuizUpdateWithoutDecisionDataInput!
+}
+
+input QuizUpdateWithWhereUniqueWithoutUserInput {
+  where: QuizWhereUniqueInput!
+  data: QuizUpdateWithoutUserDataInput!
+}
+
+input QuizUpsertWithoutQuestionsInput {
+  update: QuizUpdateWithoutQuestionsDataInput!
+  create: QuizCreateWithoutQuestionsInput!
+}
+
+input QuizUpsertWithoutReportsInput {
+  update: QuizUpdateWithoutReportsDataInput!
+  create: QuizCreateWithoutReportsInput!
+}
+
+input QuizUpsertWithWhereUniqueNestedInput {
+  where: QuizWhereUniqueInput!
+  update: QuizUpdateDataInput!
+  create: QuizCreateInput!
+}
+
+input QuizUpsertWithWhereUniqueWithoutDecisionInput {
+  where: QuizWhereUniqueInput!
+  update: QuizUpdateWithoutDecisionDataInput!
+  create: QuizCreateWithoutDecisionInput!
+}
+
+input QuizUpsertWithWhereUniqueWithoutUserInput {
+  where: QuizWhereUniqueInput!
+  update: QuizUpdateWithoutUserDataInput!
+  create: QuizCreateWithoutUserInput!
+}
+
+input QuizWhereInput {
+  """Logical AND on all given filters."""
+  AND: [QuizWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [QuizWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [QuizWhereInput!]
+  checkLocation: Boolean
+
+  """All values that are not equal to given value."""
+  checkLocation_not: Boolean
+  creationDate: DateTime
+
+  """All values that are not equal to given value."""
+  creationDate_not: DateTime
+
+  """All values that are contained in given list."""
+  creationDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  creationDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  creationDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  creationDate_lte: DateTime
+
+  """All values greater than the given value."""
+  creationDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  creationDate_gte: DateTime
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  lastUpdated: DateTime
+
+  """All values that are not equal to given value."""
+  lastUpdated_not: DateTime
+
+  """All values that are contained in given list."""
+  lastUpdated_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  lastUpdated_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  lastUpdated_lt: DateTime
+
+  """All values less than or equal the given value."""
+  lastUpdated_lte: DateTime
+
+  """All values greater than the given value."""
+  lastUpdated_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  lastUpdated_gte: DateTime
+  publishDate: DateTime
+
+  """All values that are not equal to given value."""
+  publishDate_not: DateTime
+
+  """All values that are contained in given list."""
+  publishDate_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  publishDate_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  publishDate_lt: DateTime
+
+  """All values less than or equal the given value."""
+  publishDate_lte: DateTime
+
+  """All values greater than the given value."""
+  publishDate_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  publishDate_gte: DateTime
+  status: String
+
+  """All values that are not equal to given value."""
+  status_not: String
+
+  """All values that are contained in given list."""
+  status_in: [String!]
+
+  """All values that are not contained in given list."""
+  status_not_in: [String!]
+
+  """All values less than the given value."""
+  status_lt: String
+
+  """All values less than or equal the given value."""
+  status_lte: String
+
+  """All values greater than the given value."""
+  status_gt: String
+
+  """All values greater than or equal the given value."""
+  status_gte: String
+
+  """All values containing the given string."""
+  status_contains: String
+
+  """All values not containing the given string."""
+  status_not_contains: String
+
+  """All values starting with the given string."""
+  status_starts_with: String
+
+  """All values not starting with the given string."""
+  status_not_starts_with: String
+
+  """All values ending with the given string."""
+  status_ends_with: String
+
+  """All values not ending with the given string."""
+  status_not_ends_with: String
+  timing: DateTime
+
+  """All values that are not equal to given value."""
+  timing_not: DateTime
+
+  """All values that are contained in given list."""
+  timing_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  timing_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  timing_lt: DateTime
+
+  """All values less than or equal the given value."""
+  timing_lte: DateTime
+
+  """All values greater than the given value."""
+  timing_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  timing_gte: DateTime
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  type: String
+
+  """All values that are not equal to given value."""
+  type_not: String
+
+  """All values that are contained in given list."""
+  type_in: [String!]
+
+  """All values that are not contained in given list."""
+  type_not_in: [String!]
+
+  """All values less than the given value."""
+  type_lt: String
+
+  """All values less than or equal the given value."""
+  type_lte: String
+
+  """All values greater than the given value."""
+  type_gt: String
+
+  """All values greater than or equal the given value."""
+  type_gte: String
+
+  """All values containing the given string."""
+  type_contains: String
+
+  """All values not containing the given string."""
+  type_not_contains: String
+
+  """All values starting with the given string."""
+  type_starts_with: String
+
+  """All values not starting with the given string."""
+  type_not_starts_with: String
+
+  """All values ending with the given string."""
+  type_ends_with: String
+
+  """All values not ending with the given string."""
+  type_not_ends_with: String
+  decision: DecisionWhereInput
+  questions_every: QuestionWhereInput
+  questions_some: QuestionWhereInput
+  questions_none: QuestionWhereInput
+  reporters_every: ReporterProfileWhereInput
+  reporters_some: ReporterProfileWhereInput
+  reporters_none: ReporterProfileWhereInput
+  reports_every: ReportWhereInput
+  reports_some: ReportWhereInput
+  reports_none: ReportWhereInput
+  user: ManagerProfileWhereInput
+}
+
+input QuizWhereUniqueInput {
+  id: ID
+}
+
+type Report implements Node {
+  answers(where: AnswerWhereInput, orderBy: AnswerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Answer!]
+  comment: String
+  decision(where: DecisionWhereInput): Decision!
+  files(where: FileWhereInput, orderBy: FileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [File!]
+  id: ID!
+  late: Boolean!
+  location: String
+  quiz(where: QuizWhereInput): Quiz!
+  reportTime: DateTime!
+  reporter(where: ReporterProfileWhereInput): ReporterProfile!
+  status: String!
+}
+
+"""A connection to a list of items."""
+type ReportConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ReportEdge]!
+  aggregate: AggregateReport!
+}
+
+input ReportCreateInput {
+  comment: String
+  late: Boolean!
+  location: String
+  reportTime: DateTime!
+  status: String!
+  answers: AnswerCreateManyWithoutReportInput
+  decision: DecisionCreateOneWithoutReportsInput!
+  files: FileCreateManyWithoutReportInput
+  quiz: QuizCreateOneWithoutReportsInput!
+  reporter: ReporterProfileCreateOneWithoutReportsInput!
+}
+
+input ReportCreateManyWithoutDecisionInput {
+  create: [ReportCreateWithoutDecisionInput!]
+  connect: [ReportWhereUniqueInput!]
+}
+
+input ReportCreateManyWithoutQuizInput {
+  create: [ReportCreateWithoutQuizInput!]
+  connect: [ReportWhereUniqueInput!]
+}
+
+input ReportCreateManyWithoutReporterInput {
+  create: [ReportCreateWithoutReporterInput!]
+  connect: [ReportWhereUniqueInput!]
+}
+
+input ReportCreateOneWithoutAnswersInput {
+  create: ReportCreateWithoutAnswersInput
+  connect: ReportWhereUniqueInput
+}
+
+input ReportCreateOneWithoutFilesInput {
+  create: ReportCreateWithoutFilesInput
+  connect: ReportWhereUniqueInput
+}
+
+input ReportCreateWithoutAnswersInput {
+  comment: String
+  late: Boolean!
+  location: String
+  reportTime: DateTime!
+  status: String!
+  decision: DecisionCreateOneWithoutReportsInput!
+  files: FileCreateManyWithoutReportInput
+  quiz: QuizCreateOneWithoutReportsInput!
+  reporter: ReporterProfileCreateOneWithoutReportsInput!
+}
+
+input ReportCreateWithoutDecisionInput {
+  comment: String
+  late: Boolean!
+  location: String
+  reportTime: DateTime!
+  status: String!
+  answers: AnswerCreateManyWithoutReportInput
+  files: FileCreateManyWithoutReportInput
+  quiz: QuizCreateOneWithoutReportsInput!
+  reporter: ReporterProfileCreateOneWithoutReportsInput!
+}
+
+input ReportCreateWithoutFilesInput {
+  comment: String
+  late: Boolean!
+  location: String
+  reportTime: DateTime!
+  status: String!
+  answers: AnswerCreateManyWithoutReportInput
+  decision: DecisionCreateOneWithoutReportsInput!
+  quiz: QuizCreateOneWithoutReportsInput!
+  reporter: ReporterProfileCreateOneWithoutReportsInput!
+}
+
+input ReportCreateWithoutQuizInput {
+  comment: String
+  late: Boolean!
+  location: String
+  reportTime: DateTime!
+  status: String!
+  answers: AnswerCreateManyWithoutReportInput
+  decision: DecisionCreateOneWithoutReportsInput!
+  files: FileCreateManyWithoutReportInput
+  reporter: ReporterProfileCreateOneWithoutReportsInput!
+}
+
+input ReportCreateWithoutReporterInput {
+  comment: String
+  late: Boolean!
+  location: String
+  reportTime: DateTime!
+  status: String!
+  answers: AnswerCreateManyWithoutReportInput
+  decision: DecisionCreateOneWithoutReportsInput!
+  files: FileCreateManyWithoutReportInput
+  quiz: QuizCreateOneWithoutReportsInput!
+}
+
+"""An edge in a connection."""
+type ReportEdge {
+  """The item at the end of the edge."""
+  node: Report!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+type ReporterProfile implements Node {
+  id: ID!
+  createdAt: DateTime!
+  manager(where: ManagerProfileWhereInput): ManagerProfile!
+  quizzes(where: QuizWhereInput, orderBy: QuizOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Quiz!]
+  pushToken: String
+  reports(where: ReportWhereInput, orderBy: ReportOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Report!]
+  user(where: UserWhereInput): User!
+  isActive: Boolean!
+}
+
+"""A connection to a list of items."""
+type ReporterProfileConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ReporterProfileEdge]!
+  aggregate: AggregateReporterProfile!
+}
+
+input ReporterProfileCreateInput {
+  pushToken: String
+  isActive: Boolean!
+  manager: ManagerProfileCreateOneWithoutReportersInput!
+  quizzes: QuizCreateManyInput
+  reports: ReportCreateManyWithoutReporterInput
+  user: UserCreateOneWithoutReporterProfileInput!
+}
+
+input ReporterProfileCreateManyInput {
+  create: [ReporterProfileCreateInput!]
+  connect: [ReporterProfileWhereUniqueInput!]
+}
+
+input ReporterProfileCreateManyWithoutManagerInput {
+  create: [ReporterProfileCreateWithoutManagerInput!]
+  connect: [ReporterProfileWhereUniqueInput!]
+}
+
+input ReporterProfileCreateOneWithoutReportsInput {
+  create: ReporterProfileCreateWithoutReportsInput
+  connect: ReporterProfileWhereUniqueInput
+}
+
+input ReporterProfileCreateOneWithoutUserInput {
+  create: ReporterProfileCreateWithoutUserInput
+  connect: ReporterProfileWhereUniqueInput
+}
+
+input ReporterProfileCreateWithoutManagerInput {
+  pushToken: String
+  isActive: Boolean!
+  quizzes: QuizCreateManyInput
+  reports: ReportCreateManyWithoutReporterInput
+  user: UserCreateOneWithoutReporterProfileInput!
+}
+
+input ReporterProfileCreateWithoutReportsInput {
+  pushToken: String
+  isActive: Boolean!
+  manager: ManagerProfileCreateOneWithoutReportersInput!
+  quizzes: QuizCreateManyInput
+  user: UserCreateOneWithoutReporterProfileInput!
+}
+
+input ReporterProfileCreateWithoutUserInput {
+  pushToken: String
+  isActive: Boolean!
+  manager: ManagerProfileCreateOneWithoutReportersInput!
+  quizzes: QuizCreateManyInput
+  reports: ReportCreateManyWithoutReporterInput
+}
+
+"""An edge in a connection."""
+type ReporterProfileEdge {
+  """The item at the end of the edge."""
+  node: ReporterProfile!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ReporterProfileOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  pushToken_ASC
+  pushToken_DESC
+  isActive_ASC
+  isActive_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type ReporterProfilePreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  pushToken: String
+  isActive: Boolean!
+}
+
+type ReporterProfileSubscriptionPayload {
+  mutation: MutationType!
+  node: ReporterProfile
+  updatedFields: [String!]
+  previousValues: ReporterProfilePreviousValues
+}
+
+input ReporterProfileSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ReporterProfileSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ReporterProfileSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ReporterProfileSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ReporterProfileWhereInput
+}
+
+input ReporterProfileUpdateDataInput {
+  pushToken: String
+  isActive: Boolean
+  manager: ManagerProfileUpdateOneWithoutReportersInput
+  quizzes: QuizUpdateManyInput
+  reports: ReportUpdateManyWithoutReporterInput
+  user: UserUpdateOneWithoutReporterProfileInput
+}
+
+input ReporterProfileUpdateInput {
+  pushToken: String
+  isActive: Boolean
+  manager: ManagerProfileUpdateOneWithoutReportersInput
+  quizzes: QuizUpdateManyInput
+  reports: ReportUpdateManyWithoutReporterInput
+  user: UserUpdateOneWithoutReporterProfileInput
+}
+
+input ReporterProfileUpdateManyInput {
+  create: [ReporterProfileCreateInput!]
+  connect: [ReporterProfileWhereUniqueInput!]
+  disconnect: [ReporterProfileWhereUniqueInput!]
+  delete: [ReporterProfileWhereUniqueInput!]
+  update: [ReporterProfileUpdateWithWhereUniqueNestedInput!]
+  upsert: [ReporterProfileUpsertWithWhereUniqueNestedInput!]
+}
+
+input ReporterProfileUpdateManyWithoutManagerInput {
+  create: [ReporterProfileCreateWithoutManagerInput!]
+  connect: [ReporterProfileWhereUniqueInput!]
+  disconnect: [ReporterProfileWhereUniqueInput!]
+  delete: [ReporterProfileWhereUniqueInput!]
+  update: [ReporterProfileUpdateWithWhereUniqueWithoutManagerInput!]
+  upsert: [ReporterProfileUpsertWithWhereUniqueWithoutManagerInput!]
+}
+
+input ReporterProfileUpdateOneWithoutReportsInput {
+  create: ReporterProfileCreateWithoutReportsInput
+  connect: ReporterProfileWhereUniqueInput
+  delete: Boolean
+  update: ReporterProfileUpdateWithoutReportsDataInput
+  upsert: ReporterProfileUpsertWithoutReportsInput
+}
+
+input ReporterProfileUpdateOneWithoutUserInput {
+  create: ReporterProfileCreateWithoutUserInput
+  connect: ReporterProfileWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: ReporterProfileUpdateWithoutUserDataInput
+  upsert: ReporterProfileUpsertWithoutUserInput
+}
+
+input ReporterProfileUpdateWithoutManagerDataInput {
+  pushToken: String
+  isActive: Boolean
+  quizzes: QuizUpdateManyInput
+  reports: ReportUpdateManyWithoutReporterInput
+  user: UserUpdateOneWithoutReporterProfileInput
+}
+
+input ReporterProfileUpdateWithoutReportsDataInput {
+  pushToken: String
+  isActive: Boolean
+  manager: ManagerProfileUpdateOneWithoutReportersInput
+  quizzes: QuizUpdateManyInput
+  user: UserUpdateOneWithoutReporterProfileInput
+}
+
+input ReporterProfileUpdateWithoutUserDataInput {
+  pushToken: String
+  isActive: Boolean
+  manager: ManagerProfileUpdateOneWithoutReportersInput
+  quizzes: QuizUpdateManyInput
+  reports: ReportUpdateManyWithoutReporterInput
+}
+
+input ReporterProfileUpdateWithWhereUniqueNestedInput {
+  where: ReporterProfileWhereUniqueInput!
+  data: ReporterProfileUpdateDataInput!
+}
+
+input ReporterProfileUpdateWithWhereUniqueWithoutManagerInput {
+  where: ReporterProfileWhereUniqueInput!
+  data: ReporterProfileUpdateWithoutManagerDataInput!
+}
+
+input ReporterProfileUpsertWithoutReportsInput {
+  update: ReporterProfileUpdateWithoutReportsDataInput!
+  create: ReporterProfileCreateWithoutReportsInput!
+}
+
+input ReporterProfileUpsertWithoutUserInput {
+  update: ReporterProfileUpdateWithoutUserDataInput!
+  create: ReporterProfileCreateWithoutUserInput!
+}
+
+input ReporterProfileUpsertWithWhereUniqueNestedInput {
+  where: ReporterProfileWhereUniqueInput!
+  update: ReporterProfileUpdateDataInput!
+  create: ReporterProfileCreateInput!
+}
+
+input ReporterProfileUpsertWithWhereUniqueWithoutManagerInput {
+  where: ReporterProfileWhereUniqueInput!
+  update: ReporterProfileUpdateWithoutManagerDataInput!
+  create: ReporterProfileCreateWithoutManagerInput!
+}
+
+input ReporterProfileWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ReporterProfileWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ReporterProfileWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ReporterProfileWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  pushToken: String
+
+  """All values that are not equal to given value."""
+  pushToken_not: String
+
+  """All values that are contained in given list."""
+  pushToken_in: [String!]
+
+  """All values that are not contained in given list."""
+  pushToken_not_in: [String!]
+
+  """All values less than the given value."""
+  pushToken_lt: String
+
+  """All values less than or equal the given value."""
+  pushToken_lte: String
+
+  """All values greater than the given value."""
+  pushToken_gt: String
+
+  """All values greater than or equal the given value."""
+  pushToken_gte: String
+
+  """All values containing the given string."""
+  pushToken_contains: String
+
+  """All values not containing the given string."""
+  pushToken_not_contains: String
+
+  """All values starting with the given string."""
+  pushToken_starts_with: String
+
+  """All values not starting with the given string."""
+  pushToken_not_starts_with: String
+
+  """All values ending with the given string."""
+  pushToken_ends_with: String
+
+  """All values not ending with the given string."""
+  pushToken_not_ends_with: String
+  isActive: Boolean
+
+  """All values that are not equal to given value."""
+  isActive_not: Boolean
+  manager: ManagerProfileWhereInput
+  quizzes_every: QuizWhereInput
+  quizzes_some: QuizWhereInput
+  quizzes_none: QuizWhereInput
+  reports_every: ReportWhereInput
+  reports_some: ReportWhereInput
+  reports_none: ReportWhereInput
+  user: UserWhereInput
+}
+
+input ReporterProfileWhereUniqueInput {
+  id: ID
+}
+
+enum ReportOrderByInput {
+  comment_ASC
+  comment_DESC
+  id_ASC
+  id_DESC
+  late_ASC
+  late_DESC
+  location_ASC
+  location_DESC
+  reportTime_ASC
+  reportTime_DESC
+  status_ASC
+  status_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type ReportPreviousValues {
+  comment: String
+  id: ID!
+  late: Boolean!
+  location: String
+  reportTime: DateTime!
+  status: String!
+}
+
+type ReportSubscriptionPayload {
+  mutation: MutationType!
+  node: Report
+  updatedFields: [String!]
+  previousValues: ReportPreviousValues
+}
+
+input ReportSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ReportSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ReportSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ReportSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ReportWhereInput
+}
+
+input ReportUpdateInput {
+  comment: String
+  late: Boolean
+  location: String
+  reportTime: DateTime
+  status: String
+  answers: AnswerUpdateManyWithoutReportInput
+  decision: DecisionUpdateOneWithoutReportsInput
+  files: FileUpdateManyWithoutReportInput
+  quiz: QuizUpdateOneWithoutReportsInput
+  reporter: ReporterProfileUpdateOneWithoutReportsInput
+}
+
+input ReportUpdateManyWithoutDecisionInput {
+  create: [ReportCreateWithoutDecisionInput!]
+  connect: [ReportWhereUniqueInput!]
+  disconnect: [ReportWhereUniqueInput!]
+  delete: [ReportWhereUniqueInput!]
+  update: [ReportUpdateWithWhereUniqueWithoutDecisionInput!]
+  upsert: [ReportUpsertWithWhereUniqueWithoutDecisionInput!]
+}
+
+input ReportUpdateManyWithoutQuizInput {
+  create: [ReportCreateWithoutQuizInput!]
+  connect: [ReportWhereUniqueInput!]
+  disconnect: [ReportWhereUniqueInput!]
+  delete: [ReportWhereUniqueInput!]
+  update: [ReportUpdateWithWhereUniqueWithoutQuizInput!]
+  upsert: [ReportUpsertWithWhereUniqueWithoutQuizInput!]
+}
+
+input ReportUpdateManyWithoutReporterInput {
+  create: [ReportCreateWithoutReporterInput!]
+  connect: [ReportWhereUniqueInput!]
+  disconnect: [ReportWhereUniqueInput!]
+  delete: [ReportWhereUniqueInput!]
+  update: [ReportUpdateWithWhereUniqueWithoutReporterInput!]
+  upsert: [ReportUpsertWithWhereUniqueWithoutReporterInput!]
+}
+
+input ReportUpdateOneWithoutAnswersInput {
+  create: ReportCreateWithoutAnswersInput
+  connect: ReportWhereUniqueInput
+  delete: Boolean
+  update: ReportUpdateWithoutAnswersDataInput
+  upsert: ReportUpsertWithoutAnswersInput
+}
+
+input ReportUpdateOneWithoutFilesInput {
+  create: ReportCreateWithoutFilesInput
+  connect: ReportWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: ReportUpdateWithoutFilesDataInput
+  upsert: ReportUpsertWithoutFilesInput
+}
+
+input ReportUpdateWithoutAnswersDataInput {
+  comment: String
+  late: Boolean
+  location: String
+  reportTime: DateTime
+  status: String
+  decision: DecisionUpdateOneWithoutReportsInput
+  files: FileUpdateManyWithoutReportInput
+  quiz: QuizUpdateOneWithoutReportsInput
+  reporter: ReporterProfileUpdateOneWithoutReportsInput
+}
+
+input ReportUpdateWithoutDecisionDataInput {
+  comment: String
+  late: Boolean
+  location: String
+  reportTime: DateTime
+  status: String
+  answers: AnswerUpdateManyWithoutReportInput
+  files: FileUpdateManyWithoutReportInput
+  quiz: QuizUpdateOneWithoutReportsInput
+  reporter: ReporterProfileUpdateOneWithoutReportsInput
+}
+
+input ReportUpdateWithoutFilesDataInput {
+  comment: String
+  late: Boolean
+  location: String
+  reportTime: DateTime
+  status: String
+  answers: AnswerUpdateManyWithoutReportInput
+  decision: DecisionUpdateOneWithoutReportsInput
+  quiz: QuizUpdateOneWithoutReportsInput
+  reporter: ReporterProfileUpdateOneWithoutReportsInput
+}
+
+input ReportUpdateWithoutQuizDataInput {
+  comment: String
+  late: Boolean
+  location: String
+  reportTime: DateTime
+  status: String
+  answers: AnswerUpdateManyWithoutReportInput
+  decision: DecisionUpdateOneWithoutReportsInput
+  files: FileUpdateManyWithoutReportInput
+  reporter: ReporterProfileUpdateOneWithoutReportsInput
+}
+
+input ReportUpdateWithoutReporterDataInput {
+  comment: String
+  late: Boolean
+  location: String
+  reportTime: DateTime
+  status: String
+  answers: AnswerUpdateManyWithoutReportInput
+  decision: DecisionUpdateOneWithoutReportsInput
+  files: FileUpdateManyWithoutReportInput
+  quiz: QuizUpdateOneWithoutReportsInput
+}
+
+input ReportUpdateWithWhereUniqueWithoutDecisionInput {
+  where: ReportWhereUniqueInput!
+  data: ReportUpdateWithoutDecisionDataInput!
+}
+
+input ReportUpdateWithWhereUniqueWithoutQuizInput {
+  where: ReportWhereUniqueInput!
+  data: ReportUpdateWithoutQuizDataInput!
+}
+
+input ReportUpdateWithWhereUniqueWithoutReporterInput {
+  where: ReportWhereUniqueInput!
+  data: ReportUpdateWithoutReporterDataInput!
+}
+
+input ReportUpsertWithoutAnswersInput {
+  update: ReportUpdateWithoutAnswersDataInput!
+  create: ReportCreateWithoutAnswersInput!
+}
+
+input ReportUpsertWithoutFilesInput {
+  update: ReportUpdateWithoutFilesDataInput!
+  create: ReportCreateWithoutFilesInput!
+}
+
+input ReportUpsertWithWhereUniqueWithoutDecisionInput {
+  where: ReportWhereUniqueInput!
+  update: ReportUpdateWithoutDecisionDataInput!
+  create: ReportCreateWithoutDecisionInput!
+}
+
+input ReportUpsertWithWhereUniqueWithoutQuizInput {
+  where: ReportWhereUniqueInput!
+  update: ReportUpdateWithoutQuizDataInput!
+  create: ReportCreateWithoutQuizInput!
+}
+
+input ReportUpsertWithWhereUniqueWithoutReporterInput {
+  where: ReportWhereUniqueInput!
+  update: ReportUpdateWithoutReporterDataInput!
+  create: ReportCreateWithoutReporterInput!
+}
+
+input ReportWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ReportWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ReportWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ReportWhereInput!]
+  comment: String
+
+  """All values that are not equal to given value."""
+  comment_not: String
+
+  """All values that are contained in given list."""
+  comment_in: [String!]
+
+  """All values that are not contained in given list."""
+  comment_not_in: [String!]
+
+  """All values less than the given value."""
+  comment_lt: String
+
+  """All values less than or equal the given value."""
+  comment_lte: String
+
+  """All values greater than the given value."""
+  comment_gt: String
+
+  """All values greater than or equal the given value."""
+  comment_gte: String
+
+  """All values containing the given string."""
+  comment_contains: String
+
+  """All values not containing the given string."""
+  comment_not_contains: String
+
+  """All values starting with the given string."""
+  comment_starts_with: String
+
+  """All values not starting with the given string."""
+  comment_not_starts_with: String
+
+  """All values ending with the given string."""
+  comment_ends_with: String
+
+  """All values not ending with the given string."""
+  comment_not_ends_with: String
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  late: Boolean
+
+  """All values that are not equal to given value."""
+  late_not: Boolean
+  location: String
+
+  """All values that are not equal to given value."""
+  location_not: String
+
+  """All values that are contained in given list."""
+  location_in: [String!]
+
+  """All values that are not contained in given list."""
+  location_not_in: [String!]
+
+  """All values less than the given value."""
+  location_lt: String
+
+  """All values less than or equal the given value."""
+  location_lte: String
+
+  """All values greater than the given value."""
+  location_gt: String
+
+  """All values greater than or equal the given value."""
+  location_gte: String
+
+  """All values containing the given string."""
+  location_contains: String
+
+  """All values not containing the given string."""
+  location_not_contains: String
+
+  """All values starting with the given string."""
+  location_starts_with: String
+
+  """All values not starting with the given string."""
+  location_not_starts_with: String
+
+  """All values ending with the given string."""
+  location_ends_with: String
+
+  """All values not ending with the given string."""
+  location_not_ends_with: String
+  reportTime: DateTime
+
+  """All values that are not equal to given value."""
+  reportTime_not: DateTime
+
+  """All values that are contained in given list."""
+  reportTime_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  reportTime_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  reportTime_lt: DateTime
+
+  """All values less than or equal the given value."""
+  reportTime_lte: DateTime
+
+  """All values greater than the given value."""
+  reportTime_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  reportTime_gte: DateTime
+  status: String
+
+  """All values that are not equal to given value."""
+  status_not: String
+
+  """All values that are contained in given list."""
+  status_in: [String!]
+
+  """All values that are not contained in given list."""
+  status_not_in: [String!]
+
+  """All values less than the given value."""
+  status_lt: String
+
+  """All values less than or equal the given value."""
+  status_lte: String
+
+  """All values greater than the given value."""
+  status_gt: String
+
+  """All values greater than or equal the given value."""
+  status_gte: String
+
+  """All values containing the given string."""
+  status_contains: String
+
+  """All values not containing the given string."""
+  status_not_contains: String
+
+  """All values starting with the given string."""
+  status_starts_with: String
+
+  """All values not starting with the given string."""
+  status_not_starts_with: String
+
+  """All values ending with the given string."""
+  status_ends_with: String
+
+  """All values not ending with the given string."""
+  status_not_ends_with: String
+  answers_every: AnswerWhereInput
+  answers_some: AnswerWhereInput
+  answers_none: AnswerWhereInput
+  decision: DecisionWhereInput
+  files_every: FileWhereInput
+  files_some: FileWhereInput
+  files_none: FileWhereInput
+  quiz: QuizWhereInput
+  reporter: ReporterProfileWhereInput
+}
+
+input ReportWhereUniqueInput {
+  id: ID
+}
+
+type Subscription {
+  answer(where: AnswerSubscriptionWhereInput): AnswerSubscriptionPayload
+  comment(where: CommentSubscriptionWhereInput): CommentSubscriptionPayload
+  decision(where: DecisionSubscriptionWhereInput): DecisionSubscriptionPayload
+  file(where: FileSubscriptionWhereInput): FileSubscriptionPayload
+  notificationSettings(where: NotificationSettingsSubscriptionWhereInput): NotificationSettingsSubscriptionPayload
+  onQuizStatusChange(where: OnQuizStatusChangeSubscriptionWhereInput): OnQuizStatusChangeSubscriptionPayload
+  question(where: QuestionSubscriptionWhereInput): QuestionSubscriptionPayload
+  quiz(where: QuizSubscriptionWhereInput): QuizSubscriptionPayload
+  report(where: ReportSubscriptionWhereInput): ReportSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  managerProfile(where: ManagerProfileSubscriptionWhereInput): ManagerProfileSubscriptionPayload
+  reporterProfile(where: ReporterProfileSubscriptionWhereInput): ReporterProfileSubscriptionPayload
+}
+
+type User implements Node {
+  additionalPhone: String
+  address: String!
+  createdAt: DateTime!
+  email: String!
+  firstName: String!
+  id: ID!
+  uid: String!
+  lastName: String!
+  message: String
+  phone: String!
+  roles: [String!]
+  managerProfile(where: ManagerProfileWhereInput): ManagerProfile
+  reporterProfile(where: ReporterProfileWhereInput): ReporterProfile
+}
+
+"""A connection to a list of items."""
+type UserConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
+}
+
+input UserCreateInput {
+  additionalPhone: String
+  address: String!
+  email: String!
+  firstName: String!
+  uid: String!
+  lastName: String!
+  message: String
+  phone: String!
+  roles: UserCreaterolesInput
+  managerProfile: ManagerProfileCreateOneWithoutUserInput
+  reporterProfile: ReporterProfileCreateOneWithoutUserInput
+}
+
+input UserCreateOneWithoutManagerProfileInput {
+  create: UserCreateWithoutManagerProfileInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutReporterProfileInput {
+  create: UserCreateWithoutReporterProfileInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreaterolesInput {
+  set: [String!]
+}
+
+input UserCreateWithoutManagerProfileInput {
+  additionalPhone: String
+  address: String!
+  email: String!
+  firstName: String!
+  uid: String!
+  lastName: String!
+  message: String
+  phone: String!
+  roles: UserCreaterolesInput
+  reporterProfile: ReporterProfileCreateOneWithoutUserInput
+}
+
+input UserCreateWithoutReporterProfileInput {
+  additionalPhone: String
+  address: String!
+  email: String!
+  firstName: String!
+  uid: String!
+  lastName: String!
+  message: String
+  phone: String!
+  roles: UserCreaterolesInput
+  managerProfile: ManagerProfileCreateOneWithoutUserInput
+}
+
+"""An edge in a connection."""
+type UserEdge {
+  """The item at the end of the edge."""
+  node: User!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum UserOrderByInput {
+  additionalPhone_ASC
+  additionalPhone_DESC
+  address_ASC
+  address_DESC
+  createdAt_ASC
+  createdAt_DESC
+  email_ASC
+  email_DESC
+  firstName_ASC
+  firstName_DESC
+  id_ASC
+  id_DESC
+  uid_ASC
+  uid_DESC
+  lastName_ASC
+  lastName_DESC
+  message_ASC
+  message_DESC
+  phone_ASC
+  phone_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+}
+
+type UserPreviousValues {
+  additionalPhone: String
+  address: String!
+  createdAt: DateTime!
+  email: String!
+  firstName: String!
+  id: ID!
+  uid: String!
+  lastName: String!
+  message: String
+  phone: String!
+  roles: [String!]
+}
+
+type UserSubscriptionPayload {
+  mutation: MutationType!
+  node: User
+  updatedFields: [String!]
+  previousValues: UserPreviousValues
+}
+
+input UserSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: UserWhereInput
+}
+
+input UserUpdateInput {
+  additionalPhone: String
+  address: String
+  email: String
+  firstName: String
+  uid: String
+  lastName: String
+  message: String
+  phone: String
+  roles: UserUpdaterolesInput
+  managerProfile: ManagerProfileUpdateOneWithoutUserInput
+  reporterProfile: ReporterProfileUpdateOneWithoutUserInput
+}
+
+input UserUpdateOneWithoutManagerProfileInput {
+  create: UserCreateWithoutManagerProfileInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutManagerProfileDataInput
+  upsert: UserUpsertWithoutManagerProfileInput
+}
+
+input UserUpdateOneWithoutReporterProfileInput {
+  create: UserCreateWithoutReporterProfileInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutReporterProfileDataInput
+  upsert: UserUpsertWithoutReporterProfileInput
+}
+
+input UserUpdaterolesInput {
+  set: [String!]
+}
+
+input UserUpdateWithoutManagerProfileDataInput {
+  additionalPhone: String
+  address: String
+  email: String
+  firstName: String
+  uid: String
+  lastName: String
+  message: String
+  phone: String
+  roles: UserUpdaterolesInput
+  reporterProfile: ReporterProfileUpdateOneWithoutUserInput
+}
+
+input UserUpdateWithoutReporterProfileDataInput {
+  additionalPhone: String
+  address: String
+  email: String
+  firstName: String
+  uid: String
+  lastName: String
+  message: String
+  phone: String
+  roles: UserUpdaterolesInput
+  managerProfile: ManagerProfileUpdateOneWithoutUserInput
+}
+
+input UserUpsertWithoutManagerProfileInput {
+  update: UserUpdateWithoutManagerProfileDataInput!
+  create: UserCreateWithoutManagerProfileInput!
+}
+
+input UserUpsertWithoutReporterProfileInput {
+  update: UserUpdateWithoutReporterProfileDataInput!
+  create: UserCreateWithoutReporterProfileInput!
+}
+
+input UserWhereInput {
+  """Logical AND on all given filters."""
+  AND: [UserWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserWhereInput!]
+  additionalPhone: String
+
+  """All values that are not equal to given value."""
+  additionalPhone_not: String
+
+  """All values that are contained in given list."""
+  additionalPhone_in: [String!]
+
+  """All values that are not contained in given list."""
+  additionalPhone_not_in: [String!]
+
+  """All values less than the given value."""
+  additionalPhone_lt: String
+
+  """All values less than or equal the given value."""
+  additionalPhone_lte: String
+
+  """All values greater than the given value."""
+  additionalPhone_gt: String
+
+  """All values greater than or equal the given value."""
+  additionalPhone_gte: String
+
+  """All values containing the given string."""
+  additionalPhone_contains: String
+
+  """All values not containing the given string."""
+  additionalPhone_not_contains: String
+
+  """All values starting with the given string."""
+  additionalPhone_starts_with: String
+
+  """All values not starting with the given string."""
+  additionalPhone_not_starts_with: String
+
+  """All values ending with the given string."""
+  additionalPhone_ends_with: String
+
+  """All values not ending with the given string."""
+  additionalPhone_not_ends_with: String
+  address: String
+
+  """All values that are not equal to given value."""
+  address_not: String
+
+  """All values that are contained in given list."""
+  address_in: [String!]
+
+  """All values that are not contained in given list."""
+  address_not_in: [String!]
+
+  """All values less than the given value."""
+  address_lt: String
+
+  """All values less than or equal the given value."""
+  address_lte: String
+
+  """All values greater than the given value."""
+  address_gt: String
+
+  """All values greater than or equal the given value."""
+  address_gte: String
+
+  """All values containing the given string."""
+  address_contains: String
+
+  """All values not containing the given string."""
+  address_not_contains: String
+
+  """All values starting with the given string."""
+  address_starts_with: String
+
+  """All values not starting with the given string."""
+  address_not_starts_with: String
+
+  """All values ending with the given string."""
+  address_ends_with: String
+
+  """All values not ending with the given string."""
+  address_not_ends_with: String
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  email: String
+
+  """All values that are not equal to given value."""
+  email_not: String
+
+  """All values that are contained in given list."""
+  email_in: [String!]
+
+  """All values that are not contained in given list."""
+  email_not_in: [String!]
+
+  """All values less than the given value."""
+  email_lt: String
+
+  """All values less than or equal the given value."""
+  email_lte: String
+
+  """All values greater than the given value."""
+  email_gt: String
+
+  """All values greater than or equal the given value."""
+  email_gte: String
+
+  """All values containing the given string."""
+  email_contains: String
+
+  """All values not containing the given string."""
+  email_not_contains: String
+
+  """All values starting with the given string."""
+  email_starts_with: String
+
+  """All values not starting with the given string."""
+  email_not_starts_with: String
+
+  """All values ending with the given string."""
+  email_ends_with: String
+
+  """All values not ending with the given string."""
+  email_not_ends_with: String
+  firstName: String
+
+  """All values that are not equal to given value."""
+  firstName_not: String
+
+  """All values that are contained in given list."""
+  firstName_in: [String!]
+
+  """All values that are not contained in given list."""
+  firstName_not_in: [String!]
+
+  """All values less than the given value."""
+  firstName_lt: String
+
+  """All values less than or equal the given value."""
+  firstName_lte: String
+
+  """All values greater than the given value."""
+  firstName_gt: String
+
+  """All values greater than or equal the given value."""
+  firstName_gte: String
+
+  """All values containing the given string."""
+  firstName_contains: String
+
+  """All values not containing the given string."""
+  firstName_not_contains: String
+
+  """All values starting with the given string."""
+  firstName_starts_with: String
+
+  """All values not starting with the given string."""
+  firstName_not_starts_with: String
+
+  """All values ending with the given string."""
+  firstName_ends_with: String
+
+  """All values not ending with the given string."""
+  firstName_not_ends_with: String
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  uid: String
+
+  """All values that are not equal to given value."""
+  uid_not: String
+
+  """All values that are contained in given list."""
+  uid_in: [String!]
+
+  """All values that are not contained in given list."""
+  uid_not_in: [String!]
+
+  """All values less than the given value."""
+  uid_lt: String
+
+  """All values less than or equal the given value."""
+  uid_lte: String
+
+  """All values greater than the given value."""
+  uid_gt: String
+
+  """All values greater than or equal the given value."""
+  uid_gte: String
+
+  """All values containing the given string."""
+  uid_contains: String
+
+  """All values not containing the given string."""
+  uid_not_contains: String
+
+  """All values starting with the given string."""
+  uid_starts_with: String
+
+  """All values not starting with the given string."""
+  uid_not_starts_with: String
+
+  """All values ending with the given string."""
+  uid_ends_with: String
+
+  """All values not ending with the given string."""
+  uid_not_ends_with: String
+  lastName: String
+
+  """All values that are not equal to given value."""
+  lastName_not: String
+
+  """All values that are contained in given list."""
+  lastName_in: [String!]
+
+  """All values that are not contained in given list."""
+  lastName_not_in: [String!]
+
+  """All values less than the given value."""
+  lastName_lt: String
+
+  """All values less than or equal the given value."""
+  lastName_lte: String
+
+  """All values greater than the given value."""
+  lastName_gt: String
+
+  """All values greater than or equal the given value."""
+  lastName_gte: String
+
+  """All values containing the given string."""
+  lastName_contains: String
+
+  """All values not containing the given string."""
+  lastName_not_contains: String
+
+  """All values starting with the given string."""
+  lastName_starts_with: String
+
+  """All values not starting with the given string."""
+  lastName_not_starts_with: String
+
+  """All values ending with the given string."""
+  lastName_ends_with: String
+
+  """All values not ending with the given string."""
+  lastName_not_ends_with: String
+  message: String
+
+  """All values that are not equal to given value."""
+  message_not: String
+
+  """All values that are contained in given list."""
+  message_in: [String!]
+
+  """All values that are not contained in given list."""
+  message_not_in: [String!]
+
+  """All values less than the given value."""
+  message_lt: String
+
+  """All values less than or equal the given value."""
+  message_lte: String
+
+  """All values greater than the given value."""
+  message_gt: String
+
+  """All values greater than or equal the given value."""
+  message_gte: String
+
+  """All values containing the given string."""
+  message_contains: String
+
+  """All values not containing the given string."""
+  message_not_contains: String
+
+  """All values starting with the given string."""
+  message_starts_with: String
+
+  """All values not starting with the given string."""
+  message_not_starts_with: String
+
+  """All values ending with the given string."""
+  message_ends_with: String
+
+  """All values not ending with the given string."""
+  message_not_ends_with: String
+  phone: String
+
+  """All values that are not equal to given value."""
+  phone_not: String
+
+  """All values that are contained in given list."""
+  phone_in: [String!]
+
+  """All values that are not contained in given list."""
+  phone_not_in: [String!]
+
+  """All values less than the given value."""
+  phone_lt: String
+
+  """All values less than or equal the given value."""
+  phone_lte: String
+
+  """All values greater than the given value."""
+  phone_gt: String
+
+  """All values greater than or equal the given value."""
+  phone_gte: String
+
+  """All values containing the given string."""
+  phone_contains: String
+
+  """All values not containing the given string."""
+  phone_not_contains: String
+
+  """All values starting with the given string."""
+  phone_starts_with: String
+
+  """All values not starting with the given string."""
+  phone_not_starts_with: String
+
+  """All values ending with the given string."""
+  phone_ends_with: String
+
+  """All values not ending with the given string."""
+  phone_not_ends_with: String
+  managerProfile: ManagerProfileWhereInput
+  reporterProfile: ReporterProfileWhereInput
+}
+
+input UserWhereUniqueInput {
+  email: String
+  id: ID
+  uid: String
+}

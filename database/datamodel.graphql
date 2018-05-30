@@ -1,0 +1,144 @@
+type Answer  {
+    answer: String!
+    comment: String
+    files: [File!]! @relation(name: "FilesToAnswer")
+    id: ID! @unique
+    report: Report! @relation(name: "AnswerToReport")
+    selectedOption: Int!
+}
+
+type Comment  {
+    creationDate: DateTime!
+    id: ID! @unique
+    text: String!
+    user: ManagerProfile! @relation(name: "UserComments")
+}
+#
+type Decision  {
+    activeStep: Int!
+    category: String
+    creationDate: DateTime!
+    description: String!
+    extId: String!
+    id: ID! @unique
+    lastUpdate: DateTime
+    link: String
+    publishDate: DateTime
+    quizzes: [Quiz!]! @relation(name: "QuizToDecision")
+    reports: [Report!]! @relation(name: "ReportToDecision")
+    status: String!
+    steps: [String!]
+    title: String!
+    user: ManagerProfile! @relation(name: "DecisionToManager")
+}
+#
+type File  {
+    answer: Answer @relation(name: "FilesToAnswer")
+    contentType: String!
+    createdAt: DateTime!
+    id: ID! @unique
+    name: String!
+    report: Report @relation(name: "FileToReport")
+    size: Int!
+    updatedAt: DateTime!
+    url: String! @unique
+}
+#
+type NotificationSettings  {
+    id: ID! @unique
+    onQuizStatusChange: OnQuizStatusChange! @relation(name: "NotificationSettingsOnOnQuizStatusChange")
+    user: ManagerProfile! @relation(name: "UserOnNotificationSettings")
+}
+#
+type OnQuizStatusChange  {
+    content: String! @default(value: "הודעה אוטומטית על שינוי בסטטוס של שאלון")
+    enabled: Boolean! @default(value: true)
+    id: ID! @unique
+    notificationSettings: NotificationSettings! @relation(name: "NotificationSettingsOnOnQuizStatusChange")
+}
+#
+type Question  {
+    answer: String
+    defaultText: String!
+    description: String!
+    id: ID! @unique
+    options: [String!]
+    order: Int!
+    quiz: Quiz! @relation(name: "QuizOnQuestion")
+    title: String!
+    type: String!
+    unanswered: Int!
+}
+
+type Quiz  {
+    checkLocation: Boolean! @default(value: false)
+    creationDate: DateTime!
+    decision: Decision @relation(name: "QuizToDecision")
+    id: ID! @unique
+    lastUpdated: DateTime
+    publishDate: DateTime
+    questions: [Question!]! @relation(name: "QuizOnQuestion")
+    reporters: [ReporterProfile!]! @relation(name: "QuizzesToReporter")
+    reports: [Report!]! @relation(name: "ReportToQuiz")
+    status: String!
+    timing: DateTime!
+    title: String!
+    type: String!
+    user: ManagerProfile! @relation(name: "QuizToManager")
+}
+
+type Report  {
+    answers: [Answer!]! @relation(name: "AnswerToReport")
+    comment: String
+    decision: Decision! @relation(name: "ReportToDecision")
+    files: [File!]! @relation(name: "FileToReport")
+    id: ID! @unique
+    late: Boolean!
+    location: String
+    quiz: Quiz! @relation(name: "ReportToQuiz")
+    reportTime: DateTime!
+    reporter: ReporterProfile! @relation(name: "ReportByReporter")
+    status: String!
+}
+#
+type User  {
+    additionalPhone: String
+    address: String!
+    createdAt: DateTime!
+    email: String! @unique
+    firstName: String!
+    id: ID! @unique
+    uid:String! @unique
+    lastName: String!
+    message: String
+    phone: String!
+    roles: [String!]!
+    managerProfile: ManagerProfile @relation(name:"ManagerProfile")
+    reporterProfile: ReporterProfile @relation(name:"ReporterProfile")
+}
+
+type ManagerProfile {
+    id:ID! @unique
+    createdAt: DateTime!
+    decisions:[Decision!]! @relation(name: "DecisionToManager")
+    notificationsSettings:[NotificationSettings!]! @relation(name: "UserOnNotificationSettings")
+    quizzes: [Quiz!]! @relation(name: "QuizToManager")
+    reporters: [ReporterProfile!]! @relation(name: "ReportersToManager")
+    userName: String
+    isAdmin: Boolean
+    comments: [Comment!]! @relation(name: "UserComments")
+    user: User! @relation(name:"ManagerProfile")
+    isActive:Boolean!
+
+}
+
+type ReporterProfile {
+    id:ID! @unique
+    createdAt: DateTime!
+    manager:ManagerProfile!  @relation(name: "ReportersToManager")
+    quizzes: [Quiz!]! @relation(name: "QuizToReporters")
+    pushToken: String
+    reports: [Report!]! @relation(name: "ReportByReporter")
+    user: User! @relation(name:"ReporterProfile")
+    isActive:Boolean!
+}
