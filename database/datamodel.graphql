@@ -13,7 +13,7 @@ type Comment  {
     text: String!
     user: ManagerProfile! @relation(name: "UserComments")
 }
-#
+
 type Decision  {
     activeStep: Int!
     category: String
@@ -31,7 +31,7 @@ type Decision  {
     title: String!
     user: ManagerProfile! @relation(name: "DecisionToManager")
 }
-#
+
 type File  {
     answer: Answer @relation(name: "FilesToAnswer")
     contentType: String!
@@ -43,20 +43,20 @@ type File  {
     updatedAt: DateTime!
     url: String! @unique
 }
-#
+
 type NotificationSettings  {
     id: ID! @unique
     onQuizStatusChange: OnQuizStatusChange! @relation(name: "NotificationSettingsOnOnQuizStatusChange")
     user: ManagerProfile! @relation(name: "UserOnNotificationSettings")
 }
-#
+
 type OnQuizStatusChange  {
     content: String! @default(value: "הודעה אוטומטית על שינוי בסטטוס של שאלון")
     enabled: Boolean! @default(value: true)
     id: ID! @unique
     notificationSettings: NotificationSettings! @relation(name: "NotificationSettingsOnOnQuizStatusChange")
 }
-#
+
 type Question  {
     answer: String
     defaultText: String!
@@ -100,7 +100,7 @@ type Report  {
     reporter: ReporterProfile! @relation(name: "ReportByReporter")
     status: String!
 }
-#
+
 type User  {
     additionalPhone: String
     address: String!

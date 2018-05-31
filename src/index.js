@@ -1,7 +1,7 @@
 const { GraphQLServer } = require ( 'graphql-yoga' );
 const { Prisma }        = require ( 'prisma-binding' );
 const express           = require ( 'express' );
-const { genSchema }     = require ( './utils/genSchema' );
+const resolvers         = require ( './resolvers' );
 
 const db = new Prisma ( {
     typeDefs: 'src/generated/prisma.graphql', // the auto-generated GraphQL schema of the Prisma API
@@ -11,9 +11,13 @@ const db = new Prisma ( {
 } );
 
 const server = new GraphQLServer ( {
-    schema:                    genSchema (),
+    typeDefs:                  './src/schema.graphql',
+    resolvers,
+    resolverValidationOptions: {
+        requireResolversForResolveType: false
+    },
     
-    context:                   req => ({ ...req, db }),
+    context: req => ({ ...req, db }),
 } );
 
 server.express.use ( '/images', express.static ( 'images' ) );

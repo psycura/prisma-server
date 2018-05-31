@@ -1,0 +1,51 @@
+# import UserWhereUniqueInput,User,ManagerProfileUpdateInput,ReporterProfileUpdateInput,UserUpdateInput,UserWhereUniqueInput,User,ReporterProfileWhereUniqueInput,ManagerProfile,ManagerProfileWhereUniqueInput,ManagerProfileWhereInput,ReporterProfileOrderByInput,ReporterProfileWhereInput,ManagerProfileOrderByInput,  ManagerProfileCreateOneWithoutUserInput,ReporterProfileCreateOneWithoutUserInput,UserWhereInput,UserOrderByInput,   from "./generated/prisma.graphql"
+
+input ManagerCreateInput {
+    additionalPhone: String
+    address: String!
+    userName:String
+    email: String!
+    firstName: String!
+    password:String!
+    lastName: String!
+    message: String
+    phone: String!
+    managerProfile: ManagerProfileCreateOneWithoutUserInput
+    reporterProfile: ReporterProfileCreateOneWithoutUserInput
+}
+
+
+type Query {
+#    USERS
+    users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+    user(where: UserWhereUniqueInput!): User
+    managerProfiles(where: ManagerProfileWhereInput, orderBy: ManagerProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ManagerProfile]!
+    reporterProfiles(where: ReporterProfileWhereInput, orderBy: ReporterProfileOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ReporterProfile]!
+    managerProfile(where: ManagerProfileWhereUniqueInput!): ManagerProfile
+    reporterProfile(where: ReporterProfileWhereUniqueInput!): ReporterProfile
+#   REPORTS
+
+#   QUIZZES
+
+#   DECISIONS
+
+}
+
+type Mutation {
+#    USER
+    createManager(data: ManagerCreateInput!): User!
+    updateManager(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+    deleteUser(where: UserWhereUniqueInput!): User
+    updateManagerProfile(data: ManagerProfileUpdateInput!, where: ManagerProfileWhereUniqueInput!): ManagerProfile
+    updateReporterProfile(data: ReporterProfileUpdateInput!, where: ReporterProfileWhereUniqueInput!): ReporterProfile
+#    REPORT
+
+#   QUIZZES
+
+#    DECISIONS
+
+}
+
+
+
+
